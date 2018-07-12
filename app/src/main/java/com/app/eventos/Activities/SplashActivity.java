@@ -1,7 +1,9 @@
-package com.app.eventos;
+package com.app.eventos.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.app.eventos.R;
 
 public class SplashActivity extends AppCompatActivity {
 
