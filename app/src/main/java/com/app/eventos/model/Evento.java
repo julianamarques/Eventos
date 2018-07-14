@@ -13,7 +13,7 @@ public class Evento {
     private ArrayList<Atividade> atividades;
     private ArrayList<Inscricao> inscricoes;
     private ArrayList<Cupom> cupons;
-    private ArrayList<Organizacao> organizadores;
+    private ArrayList<ApoioRealizacao> apoioRealizacoes;
     private StatusEvento statusEvento;
     private Local local;
 
@@ -82,6 +82,4 @@ public class Evento {
     public void setLocal(Local local) {
         this.local = local;
     }
-
-
 }

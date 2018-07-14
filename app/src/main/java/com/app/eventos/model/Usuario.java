@@ -9,7 +9,7 @@ public class Usuario {
     private String senha;
     private String cpf;
     private ArrayList<Inscricao> inscricoes;
-    private ArrayList<Organizacao> criacaoEventos;
+    private ArrayList<Evento> eventos;
 
     public Usuario(String nome, String email, String senha, String cpf) {
         this.nome = nome;
@@ -58,11 +58,11 @@ public class Usuario {
         this.inscricoes = inscricoes;
     }
 
-    public ArrayList<Organizacao> getCriacaoEventos() {
-        return criacaoEventos;
+    public void setEventos(ArrayList<Evento> eventos) {
+        this.eventos = eventos;
     }
 
-    public void setCriacaoEventos(ArrayList<Organizacao> criacaoEventos) {
-        this.criacaoEventos = criacaoEventos;
+    public ArrayList<Evento> getEventos() {
+        return eventos;
     }
 }

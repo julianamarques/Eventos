@@ -1,28 +1,33 @@
 package com.app.eventos.model;
 
+import java.util.ArrayList;
+
 public class Organizacao {
+    private String nome;
+    private String descricao;
+    private ArrayList<Evento> eventos;
 
-    private Usuario usuario;
-    private Evento evento;
-
-    public Organizacao(Usuario usuario, Evento evento) {
-        this.usuario = usuario;
-        this.evento = evento;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getNome() {
+        return nome;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public Evento getEvento() {
-        return evento;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public void setEventos(ArrayList<Evento> eventos) {
+        this.eventos = eventos;
+    }
+
+    public ArrayList<Evento> getEventos() {
+        return eventos;
     }
 }
