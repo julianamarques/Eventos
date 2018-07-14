@@ -3,19 +3,16 @@ package com.app.eventos.model;
 import java.util.ArrayList;
 
 public class Usuario {
-
     private String nome;
     private String email;
     private String senha;
-    private String cpf;
     private ArrayList<Inscricao> inscricoes;
     private ArrayList<Evento> eventos;
 
-    public Usuario(String nome, String email, String senha, String cpf) {
+    public Usuario(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.cpf = cpf;
     }
 
     public String getNome() {
@@ -40,14 +37,6 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public ArrayList<Inscricao> getInscricoes() {

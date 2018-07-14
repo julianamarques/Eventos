@@ -7,4 +7,15 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="salvar">Salvar</string>
+    <string name="redigite_a_senha">Redigite a Senha</string>
+    <string name="senha">Senha</string>
+    <string name="email">Email</string>
+    <string name="nome">Nome</string>
+    <string name="login">Login</string>
+    <string name="minhas_inscricoes">Minhas Inscrições</string>
+    <string name="meus_eventos">Meus Eventos</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="entrar">Entrar</string>
+    <string name="cadastre_se">Cadastre-se</string>
 </resources>

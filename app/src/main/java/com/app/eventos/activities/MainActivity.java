@@ -1,5 +1,6 @@
 package com.app.eventos.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,10 +13,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.eventos.R;
+import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +40,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
+        user = ConfiguracaoFirebaseAuth.getFirebaseUser();
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+
+        else {
             super.onBackPressed();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -54,17 +66,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.menu_minhas_inscricoes) {
-            // Handle the camera action
-        } else if (id == R.id.menu_meus_eventos) {
+        if (id == R.id.menu_login) {
+            if (user == null) {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
 
-        } else if (id == R.id.menu_config) {
+            else {
+                item.setVisible(false);
+            }
+        }
 
-        } else if (id == R.id.menu_sair) {
+        else if (id == R.id.menu_minhas_inscricoes) {
 
+        }
+
+        else if (id == R.id.menu_meus_eventos) {
+
+        }
+
+        else if (id == R.id.menu_config) {
+
+        }
+
+        else if (id == R.id.menu_sair) {
+            ConfiguracaoFirebaseAuth.logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
