@@ -29,6 +29,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     private UsuarioController usuarioController;
     private FirebaseAuth auth;
+    private String idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,19 +43,20 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_salvar_usuario)
     public void salvarUsuario(final View view) {
-        String nome = editNome.getText().toString().trim();
-        String email = editEmail.getText().toString().trim();
-        String senha = editSenha.getText().toString().trim();
+        final String nome = editNome.getText().toString().trim();
+        final String email = editEmail.getText().toString().trim();
+        final String senha = editSenha.getText().toString().trim();
 
         try {
             ValidacaoSenha.validarSenha(editSenha, editRedigiteSenha);
-            usuarioController.cadastrarUsuario(nome, email, senha);
 
             auth.createUserWithEmailAndPassword(email, senha)
                     .addOnCompleteListener(CadastroUsuarioActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                idUser = auth.getUid();
+                                usuarioController.cadastrarUsuario(nome, email, senha, idUser);
                                 finish();
                             }
 

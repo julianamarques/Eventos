@@ -1,19 +1,17 @@
 package com.app.eventos.controllers;
 
 import com.app.eventos.dao.ConfiguracaoFirebase;
+import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
 import com.app.eventos.model.Usuario;
+import com.google.firebase.auth.FirebaseUser;
 
 public class UsuarioController {
     private Usuario usuario;
-    private static int idUsuario = 0;
 
+    public UsuarioController() {}
 
-    public void cadastrarUsuario(String nome, String email, String senha) {
-        String idUsuario = String.valueOf(this.idUsuario);
-
+    public void cadastrarUsuario(String nome, String email, String senha, String idUser) {
         usuario = new Usuario(nome, email, senha);
-
-        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUsuario).push().setValue(usuario);
-        this.idUsuario += 1;
+        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUser).setValue(usuario);
     }
 }
