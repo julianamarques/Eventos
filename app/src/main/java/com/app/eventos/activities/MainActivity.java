@@ -2,8 +2,11 @@ package com.app.eventos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,13 +20,32 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.eventos.R;
+import com.app.eventos.adapter.EventosAdapter;
+import com.app.eventos.controllers.EventoController;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
+import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    @BindView(R.id.rv_lista_eventos) protected RecyclerView recyclerEventos;
+
     private FirebaseAuth auth;
-    private FirebaseUser user;
+    private EventosAdapter eventosAdapter;
+    private EventoController eventoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -41,7 +64,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        user = ConfiguracaoFirebaseAuth.getFirebaseUser();
+        eventoController = new EventoController();
+        eventosAdapter = new EventosAdapter(this, eventoController.listarEventos());
+        eventosAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        recyclerEventos.setAdapter(eventosAdapter);
+        recyclerEventos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerEventos.setHasFixedSize(true);
     }
 
     @Override
@@ -69,13 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.menu_login) {
-            if (user == null) {
-                startActivity(new Intent(this, LoginActivity.class));
-            }
-
-            else {
-                item.setVisible(false);
-            }
+            startActivity(new Intent(this, LoginActivity.class));
         }
 
         else if (id == R.id.menu_minhas_inscricoes) {
@@ -83,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.menu_meus_eventos) {
-
+            startActivity(new Intent(this, MeusEventosActivity.class));
         }
 
         else if (id == R.id.menu_config) {
@@ -91,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.menu_sair) {
-            ConfiguracaoFirebaseAuth.logout();
+            auth.signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

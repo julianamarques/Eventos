@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Evento {
-
     private String nome;
-    private Date dataInicio;
-    private Date dataFim;
+    private String dataInicio;
+    private String dataFim;
     private String horaInicio;
     private String descricao;
     private ArrayList<Atividade> atividades;
@@ -15,15 +14,16 @@ public class Evento {
     private ArrayList<Cupom> cupons;
     private ArrayList<ApoioRealizacao> apoioRealizacoes;
     private StatusEvento statusEvento;
-    private Local local;
+    private String local;
 
-    public Evento(String nome, Date dataInicio, Date dataFim, String horaInicio, String descricao, StatusEvento statusEvento, Local local) {
+    public Evento() {}
+
+    public Evento(String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local) {
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.horaInicio = horaInicio;
         this.descricao = descricao;
-        this.statusEvento = statusEvento;
         this.local = local;
     }
 
@@ -35,19 +35,19 @@ public class Evento {
         this.nome = nome;
     }
 
-    public Date getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFim() {
+    public String getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
 
@@ -75,11 +75,11 @@ public class Evento {
         this.statusEvento = statusEvento;
     }
 
-    public Local getLocal() {
+    public String getLocal() {
         return local;
     }
 
-    public void setLocal(Local local) {
+    public void setLocal(String local) {
         this.local = local;
     }
 }
