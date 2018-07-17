@@ -1,9 +1,10 @@
 package com.app.eventos.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Evento {
+public class Evento implements Serializable {
     private String nome;
     private String dataInicio;
     private String dataFim;

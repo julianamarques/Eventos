@@ -1,6 +1,8 @@
 package com.app.eventos.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.eventos.R;
+import com.app.eventos.activities.DetalhesEventoActivity;
 import com.app.eventos.model.Evento;
 
 import java.util.List;
@@ -58,10 +61,22 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         holder.txtDataInicioEvento.setText(evento.getDataInicio());
         holder.txtHoraInicioEvento.setText(evento.getHoraInicio());
         holder.txtDataFimEvento.setText(evento.getDataFim());
+
+        configurarClickCurto(holder.itemView, evento, position);
     }
 
     @Override
     public int getItemCount() {
         return this.meusEventos.size();
+    }
+
+    public void configurarClickCurto(final View itemView, Evento evento, final int position) {
+        evento = this.meusEventos.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("evento", evento);
+
+        itemView.setOnClickListener(view -> {
+            context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtras(bundle).putExtra("positionEvento", position));
+        });
     }
 }

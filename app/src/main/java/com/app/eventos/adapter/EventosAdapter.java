@@ -2,6 +2,7 @@ package com.app.eventos.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.app.eventos.R;
 import com.app.eventos.activities.DetalhesEventoActivity;
 import com.app.eventos.model.Evento;
 import com.app.eventos.utils.FormatacaoData;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
@@ -69,9 +71,13 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
         return this.eventos.size();
     }
 
-    public void configurarClickCurto(final View itemView, final Evento evento, final int position) {
+    public void configurarClickCurto(final View itemView, Evento evento, final int position) {
+        evento = this.eventos.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("evento", evento);
+
         itemView.setOnClickListener(view -> {
-            context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtra("positionEvento", position));
+            context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtras(bundle).putExtra("positionEvento", position));
         });
     }
 }

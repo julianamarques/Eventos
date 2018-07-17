@@ -1,13 +1,25 @@
 package com.app.eventos.activities;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.EventosAdapter;
 import com.app.eventos.controllers.EventoController;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.model.Evento;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,7 +29,6 @@ public class DetalhesEventoActivity extends AppCompatActivity {
 
     private Evento evento;
     private int positionEvento;
-    private EventoController eventoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +37,14 @@ public class DetalhesEventoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         positionEvento = getIntent().getIntExtra("positionEvento", -1);
-        eventoController = new EventoController();
+        evento = (Evento) getIntent().getSerializableExtra("evento");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (positionEvento != -1) {
-            evento = eventoController.listarEventos().get(positionEvento);
-        }
-
         getSupportActionBar().setTitle(evento.getNome());
         txtVerEvento.setText(evento.getDescricao() + "\n" + evento.getDataInicio() + "\n" + evento.getHoraInicio() + "\n" + evento.getDataFim());
-
     }
 }

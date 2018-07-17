@@ -2,6 +2,7 @@ package com.app.eventos.controllers;
 
 import android.support.annotation.NonNull;
 
+import com.app.eventos.activities.MainActivity;
 import com.app.eventos.adapter.EventosAdapter;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.model.Evento;
@@ -23,30 +24,8 @@ public class EventoController {
     public void cadastrarEvento(String nome, Date dataInicio, Date dataFim, String horaInicio, String descricao, String local, String idUser) {
         evento = new Evento(nome, FormatacaoData.formatarData(dataInicio), FormatacaoData.formatarData(dataFim), horaInicio, descricao, local);
 
-
         //ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUser).child("eventos").push().setValue(evento);
         ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().setValue(evento, idUser);
-    }
-
-    public List<Evento> listarEventos() {
-        final List<Evento> eventos = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Evento evento = objSnapshot.getValue(Evento.class);
-                    eventos.add(evento);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return eventos;
     }
 
     public List<Evento> listarMeusEventos(FirebaseAuth auth) {
