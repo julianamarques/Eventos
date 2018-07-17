@@ -2,8 +2,12 @@ package com.app.eventos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,17 +17,41 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.eventos.R;
+import com.app.eventos.adapter.EventosAdapter;
+import com.app.eventos.controllers.EventoController;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
+import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    @BindView(R.id.rv_lista_eventos) protected RecyclerView recyclerEventos;
+
     private FirebaseAuth auth;
-    private FirebaseUser user;
+    private EventosAdapter eventosAdapter;
+    private int positionEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,8 +69,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        user = ConfiguracaoFirebaseAuth.getFirebaseUser();
+        positionEvento = getIntent().getIntExtra("positionEvento", -1);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        recyclerEventos.setAdapter(eventosAdapter);
+        recyclerEventos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerEventos.setHasFixedSize(true);
+        eventosAdapter = new EventosAdapter(this, listarEventos());
+    }
+
+    public List<Evento> listarEventos() {
+        final List<Evento> eventos = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Evento evento = objSnapshot.getValue(Evento.class);
+                    eventos.add(evento);
+                }
+
+                eventosAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return eventos;
     }
 
     @Override
@@ -69,13 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.menu_login) {
-            if (user == null) {
-                startActivity(new Intent(this, LoginActivity.class));
-            }
-
-            else {
-                item.setVisible(false);
-            }
+            startActivity(new Intent(this, LoginActivity.class));
         }
 
         else if (id == R.id.menu_minhas_inscricoes) {
@@ -83,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.menu_meus_eventos) {
-
+            startActivity(new Intent(this, MeusEventosActivity.class));
         }
 
         else if (id == R.id.menu_config) {
@@ -91,11 +149,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         else if (id == R.id.menu_sair) {
-            ConfiguracaoFirebaseAuth.logout();
+            auth.signOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 }

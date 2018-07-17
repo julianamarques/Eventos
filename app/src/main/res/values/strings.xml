@@ -18,4 +18,10 @@
     <string name="configuracoes">Configurações</string>
     <string name="entrar">Entrar</string>
     <string name="cadastre_se">Cadastre-se</string>
+    <string name="nome_do_evento">Nome do Evento</string>
+    <string name="descricao_do_evento">Descrição do Evento</string>
+    <string name="data_do_inicio_do_evento">Data do Início do Evento</string>
+    <string name="data_do_fim_do_evento">Data do Fim do Evento</string>
+    <string name="hora_do_início_do_evento">Hora do Início do Evento</string>
+    <string name="local_do_evento">Local do Evento</string>
 </resources>
