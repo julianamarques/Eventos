@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.app.eventos.R;
 import com.app.eventos.activities.DetalhesEventoActivity;
+import com.app.eventos.activities.InscricaoActivity;
 import com.app.eventos.model.Evento;
 import com.app.eventos.utils.FormatacaoData;
 import com.google.firebase.database.DatabaseReference;
@@ -77,7 +78,7 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
         bundle.putSerializable("evento", evento);
 
         itemView.setOnClickListener(view -> {
-            context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtras(bundle).putExtra("positionEvento", position));
+            context.startActivity(new Intent(context, InscricaoActivity.class).putExtras(bundle).putExtra("positionEvento", position));
         });
     }
 }

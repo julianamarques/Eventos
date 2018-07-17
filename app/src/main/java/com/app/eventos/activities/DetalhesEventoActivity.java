@@ -38,6 +38,8 @@ public class DetalhesEventoActivity extends AppCompatActivity {
 
         positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
+
+
     }
 
     @Override

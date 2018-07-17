@@ -26,7 +26,11 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.CadastroEventosActivity" />
         <activity android:name=".activities.MeusEventosActivity" />
-        <activity android:name=".activities.DetalhesEventoActivity"></activity>
+        <activity android:name=".activities.DetalhesEventoActivity" />
+        <activity
+            android:name=".activities.InscricaoActivity"
+            android:label="@string/title_activity_inscricao"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
