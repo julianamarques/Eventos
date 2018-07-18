@@ -15,6 +15,12 @@ import java.lang.Override;
 public class CadastroEventosActivity_ViewBinding implements Unbinder {
   private CadastroEventosActivity target;
 
+  private View view2131230762;
+
+  private View view2131230764;
+
+  private View view2131230761;
+
   private View view2131230766;
 
   @UiThread
@@ -33,6 +39,30 @@ public class CadastroEventosActivity_ViewBinding implements Unbinder {
     target.editDataInicioEvento = Utils.findRequiredViewAsType(source, R.id.edit_data_inicio_evento, "field 'editDataInicioEvento'", TextInputEditText.class);
     target.editHoraInicioEvento = Utils.findRequiredViewAsType(source, R.id.edit_hora_inicio_evento, "field 'editHoraInicioEvento'", TextInputEditText.class);
     target.editDataFimEvento = Utils.findRequiredViewAsType(source, R.id.edit_data_fim_evento, "field 'editDataFimEvento'", TextInputEditText.class);
+    view = Utils.findRequiredView(source, R.id.btn_data_inicio_evento, "method 'abrirDatePickerDataInicio'");
+    view2131230762 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.abrirDatePickerDataInicio();
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.btn_hora_inicio_evento, "method 'abrirTimePicker'");
+    view2131230764 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.abrirTimePicker();
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.btn_data_fim_evento, "method 'abrirDatePickerDataFim'");
+    view2131230761 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.abrirDatePickerDataFim();
+      }
+    });
     view = Utils.findRequiredView(source, R.id.btn_salvar_evento, "method 'salvarEvento'");
     view2131230766 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
@@ -57,6 +87,12 @@ public class CadastroEventosActivity_ViewBinding implements Unbinder {
     target.editHoraInicioEvento = null;
     target.editDataFimEvento = null;
 
+    view2131230762.setOnClickListener(null);
+    view2131230762 = null;
+    view2131230764.setOnClickListener(null);
+    view2131230764 = null;
+    view2131230761.setOnClickListener(null);
+    view2131230761 = null;
     view2131230766.setOnClickListener(null);
     view2131230766 = null;
   }

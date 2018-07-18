@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Andressa Ribeiro\\Documents\\Eventos\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
+            "outputFile": "/home/juliana/Repositorios/Eventos/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Andressa Ribeiro\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.1.aar\\ec9e457237352bd4ff36b3c288a953cb\\res\\values-v26\\values-v26.xml",
+                    "source": "/home/juliana/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/480f2fb057c1265011fc35cc68d8cc85/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Andressa Ribeiro\\.gradle\\caches\\transforms-1\\files-1.1\\design-27.1.1.aar\\4b42b1e54545334777769bdcb26803d2\\res\\values-v26\\values-v26.xml",
+                    "source": "/home/juliana/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/4c57dc9fad655acb15178dc709e6376e/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
