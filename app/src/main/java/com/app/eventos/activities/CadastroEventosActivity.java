@@ -79,7 +79,5 @@ public class CadastroEventosActivity extends AppCompatActivity {
         catch (IllegalArgumentException e) {
             Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT).show();
         }
-
-
     }
 }
