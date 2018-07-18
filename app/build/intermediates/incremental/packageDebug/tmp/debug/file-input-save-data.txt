@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Wed Jul 18 02:47:37 BRT 2018
+0.baseType=DIRECTORY
+0.base=/home/juliana/Repositorios/Eventos/app/build/intermediates/transforms/dexMerger/debug/16
+0.path=classes.dex
+0.set=DEX
+count=1

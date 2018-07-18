@@ -21,11 +21,11 @@ public class EventoController {
 
     public EventoController() {}
 
-    public void cadastrarEvento(String nome, Date dataInicio, Date dataFim, String horaInicio, String descricao, String local, String idUser) {
-        evento = new Evento(nome, FormatacaoData.formatarData(dataInicio), FormatacaoData.formatarData(dataFim), horaInicio, descricao, local);
+    public void cadastrarEvento(String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, String idUser) {
+        evento = new Evento(nome, dataInicio, dataFim, horaInicio, descricao, local);
 
         //ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUser).child("eventos").push().setValue(evento);
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().setValue(evento, idUser);
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(evento.getId()).setValue(evento, idUser);
     }
 
     public List<Evento> listarMeusEventos(FirebaseAuth auth) {

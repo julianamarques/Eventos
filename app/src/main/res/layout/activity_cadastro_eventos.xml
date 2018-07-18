@@ -56,6 +56,7 @@
                 android:id="@+id/edit_data_inicio_evento"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:hint="@string/data_do_inicio_do_evento"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -81,6 +82,7 @@
                 android:id="@+id/edit_hora_inicio_evento"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:hint="@string/hora_do_início_do_evento"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -106,6 +108,7 @@
                 android:id="@+id/edit_data_fim_evento"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:hint="@string/data_do_fim_do_evento"/>
 
         </android.support.design.widget.TextInputLayout>

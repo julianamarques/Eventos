@@ -1,18 +1,20 @@
 package com.app.eventos.activities;
 
+import android.app.DialogFragment;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.app.eventos.R;
 import com.app.eventos.controllers.EventoController;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
-import com.app.eventos.model.Evento;
-import com.app.eventos.utils.FormatacaoData;
+import com.app.eventos.fragments.DatePickerDataFimFragment;
+import com.app.eventos.fragments.DatePickerDataInicioFragment;
+import com.app.eventos.fragments.TimePickerFragment;
+import com.app.eventos.utils.ValidacaoCadastroEventoCampoVazio;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,17 +42,44 @@ public class CadastroEventosActivity extends AppCompatActivity {
         eventoController = new EventoController();
     }
 
+    @OnClick(R.id.btn_data_inicio_evento)
+    public void abrirDatePickerDataInicio() {
+        DialogFragment dialogFragment = new DatePickerDataInicioFragment();
+        dialogFragment.show(getFragmentManager(), "datePickerDataInicio");
+    }
+
+    @OnClick(R.id.btn_hora_inicio_evento)
+    public void abrirTimePicker() {
+        DialogFragment dialogFragment = new TimePickerFragment();
+        dialogFragment.show(getFragmentManager(), "timePicker");
+    }
+
+    @OnClick(R.id.btn_data_fim_evento)
+    public void abrirDatePickerDataFim() {
+        DialogFragment dialogFragment = new DatePickerDataFimFragment();
+        dialogFragment.show(getFragmentManager(), "datePickerDataFim");
+    }
+
     @OnClick(R.id.btn_salvar_evento)
-    public void salvarEvento() {
+    public void salvarEvento(View view) {
         String nome = editNomeEvento.getText().toString().trim();
         String descricao = editDescricaoEvento.getText().toString().trim();
         String local = editLocalEvento.getText().toString().trim();
-        Date dataInicio = new Date();
+        String dataInicio = editDataInicioEvento.getText().toString().trim();
         String horaInicio = editHoraInicioEvento.getText().toString().trim();
-        Date dataFim = new Date();
+        String dataFim = editDataFimEvento.getText().toString().trim();
         idUser = auth.getUid();
 
-        eventoController.cadastrarEvento(nome, dataInicio, dataFim, horaInicio, descricao, local, idUser);
-        finish();
+        try {
+            ValidacaoCadastroEventoCampoVazio.validarCampoVazio(nome, descricao, local, dataInicio, horaInicio, dataFim);
+            eventoController.cadastrarEvento(nome, dataInicio, dataFim, horaInicio, descricao, local, idUser);
+            finish();
+        }
+
+        catch (IllegalArgumentException e) {
+            Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT).show();
+        }
+
+
     }
 }
