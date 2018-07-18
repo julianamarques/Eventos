@@ -25,7 +25,7 @@ public class EventoController {
         evento = new Evento(nome, FormatacaoData.formatarData(dataInicio), FormatacaoData.formatarData(dataFim), horaInicio, descricao, local);
 
         //ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUser).child("eventos").push().setValue(evento);
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().setValue(evento, idUser);
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(evento.getId()).setValue(evento, idUser);
     }
 
     public List<Evento> listarMeusEventos(FirebaseAuth auth) {

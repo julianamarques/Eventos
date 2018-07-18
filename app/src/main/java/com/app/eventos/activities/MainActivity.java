@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        positionEvento = getIntent().getIntExtra("positionEvento", -1);
+        positionEvento = getIntent().getIntExtra("idEvento", -1);
 
     }
 
