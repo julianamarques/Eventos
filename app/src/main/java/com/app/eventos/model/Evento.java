@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class Evento implements Serializable {
     private String id;
     private String nome;
@@ -30,6 +31,10 @@ public class Evento implements Serializable {
         this.descricao = descricao;
         this.local = local;
         this.id = ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().getKey();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getNome() {
