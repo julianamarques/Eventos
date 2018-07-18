@@ -68,7 +68,7 @@ public class CadastroEventosActivity_ViewBinding implements Unbinder {
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
-        target.salvarEvento();
+        target.salvarEvento(p0);
       }
     });
   }
