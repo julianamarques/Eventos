@@ -47,11 +47,11 @@ public class DatePickerDataFimFragment extends DialogFragment implements DatePic
         }
 
         else if (diaSelecionado < 10 && mesSelecionado < 10) {
-            editData.setText("0" + diaSelecionado + "/" + "0" +mesSelecionado + "/" + anoSelecionado);
+            editData.setText("0" + diaSelecionado + "/" + "0" + mesSelecionado + "/" + anoSelecionado);
         }
 
         else if (mesSelecionado < 10 && anoSelecionado < 10) {
-            editData.setText("0" + diaSelecionado + "/" + mesSelecionado + "/" + "0" +anoSelecionado);
+            editData.setText(diaSelecionado + "/" + "0" + mesSelecionado + "/" + "0" +anoSelecionado);
         }
 
         else if (diaSelecionado < 10 && anoSelecionado < 10) {
