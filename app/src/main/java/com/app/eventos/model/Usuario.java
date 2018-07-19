@@ -1,13 +1,13 @@
 package com.app.eventos.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private ArrayList<Inscricao> inscricoes;
-    private ArrayList<Evento> eventos;
+    private List<Inscricao> inscricoes;
+    private List<Evento> eventos;
 
     public Usuario(String nome, String email, String senha) {
         this.nome = nome;
@@ -39,19 +39,19 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public ArrayList<Inscricao> getInscricoes() {
+    public List<Inscricao> getInscricoes() {
         return inscricoes;
     }
 
-    public void setInscricoes(ArrayList<Inscricao> inscricoes) {
+    public void setInscricoes(List<Inscricao> inscricoes) {
         this.inscricoes = inscricoes;
     }
 
-    public void setEventos(ArrayList<Evento> eventos) {
+    public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
     }
 
-    public ArrayList<Evento> getEventos() {
+    public List<Evento> getEventos() {
         return eventos;
     }
 }

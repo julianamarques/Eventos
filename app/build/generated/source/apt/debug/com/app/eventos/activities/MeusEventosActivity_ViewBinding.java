@@ -15,7 +15,7 @@ import java.lang.Override;
 public class MeusEventosActivity_ViewBinding implements Unbinder {
   private MeusEventosActivity target;
 
-  private View view2131230816;
+  private View view2131230817;
 
   @UiThread
   public MeusEventosActivity_ViewBinding(MeusEventosActivity target) {
@@ -29,7 +29,7 @@ public class MeusEventosActivity_ViewBinding implements Unbinder {
     View view;
     target.recyclerMeusEventos = Utils.findRequiredViewAsType(source, R.id.rv_lista_meus_eventos, "field 'recyclerMeusEventos'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.fab_adicionar_eventos, "method 'abrirCadastroEventos'");
-    view2131230816 = view;
+    view2131230817 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -47,7 +47,7 @@ public class MeusEventosActivity_ViewBinding implements Unbinder {
 
     target.recyclerMeusEventos = null;
 
-    view2131230816.setOnClickListener(null);
-    view2131230816 = null;
+    view2131230817.setOnClickListener(null);
+    view2131230817 = null;
   }
 }

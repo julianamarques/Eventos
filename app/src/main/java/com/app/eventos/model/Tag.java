@@ -3,11 +3,11 @@ package com.app.eventos.model;
 public class Tag {
 
     private String nome;
-    private EventoTag eventoTag;
+    private Evento evento;
 
-    public Tag(String nome, EventoTag eventoTag) {
+    public Tag(String nome, Evento evento) {
         this.nome = nome;
-        this.eventoTag = eventoTag;
+        this.evento = evento;
     }
 
     public String getNome() {
@@ -18,11 +18,11 @@ public class Tag {
         this.nome = nome;
     }
 
-    public EventoTag getEventoTag() {
-        return eventoTag;
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
-    public void setEventoTag(EventoTag eventoTag) {
-        this.eventoTag = eventoTag;
+    public Evento getEvento() {
+        return evento;
     }
 }

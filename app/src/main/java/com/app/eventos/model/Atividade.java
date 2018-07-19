@@ -1,21 +1,24 @@
 package com.app.eventos.model;
 
 public class Atividade {
-
     private String nome;
+    private String data;
     private String hora;
     private String descricao;
     private TipoAtividade tipoAtividade;
     private Double valor;
-    private String Responsavel;
+    private Evento evento;
+    private String responsavel;
 
-    public Atividade(String nome, String hora, String descricao, TipoAtividade tipoAtividade, Double valor, String responsavel) {
+    public Atividade() {}
+
+    public Atividade(String nome, String data, String hora, String descricao, TipoAtividade tipoAtividade, Double valor, String responsavel) {
         this.nome = nome;
         this.hora = hora;
         this.descricao = descricao;
         this.tipoAtividade = tipoAtividade;
         this.valor = valor;
-        Responsavel = responsavel;
+        this.responsavel = responsavel;
     }
 
     public String getNome() {
@@ -59,10 +62,26 @@ public class Atividade {
     }
 
     public String getResponsavel() {
-        return Responsavel;
+        return responsavel;
     }
 
     public void setResponsavel(String responsavel) {
-        Responsavel = responsavel;
+        responsavel = responsavel;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
+    public Evento getEvento() {
+        return evento;
     }
 }

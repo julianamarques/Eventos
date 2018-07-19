@@ -44,6 +44,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
         positionEvento = getIntent().getIntExtra("idEvento", -1);
-
     }
 
     @Override

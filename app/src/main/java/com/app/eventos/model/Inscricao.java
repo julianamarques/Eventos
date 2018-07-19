@@ -1,46 +1,30 @@
 package com.app.eventos.model;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 class Inscricao {
 
     private Double valorTotal;
-    private ArrayList<Atividade> atividades;
     private Boolean inscricaoPaga;
+    private List<Atividade> atividades;
     private Evento evento;
-    private Date dataVencimento;
+    private String dataVencimento;
     private Usuario usuario;
-    private static int qtdPalestra;
-    private static int qtdMiniCurso;
-    private static int qtdMesaRedonda;
-    private static Double valorPalestra = 15.00;
-    private static Double valorMiniCurso = 20.00;
-    private static Double valorMesaRedonda = 30.00;
 
-    public Inscricao(Double valorTotal, ArrayList<Atividade> atividades, Boolean inscricaoPaga, Evento evento, Date dataVencimento, Usuario usuario) {
+    public Inscricao(Double valorTotal, Boolean inscricaoPaga, Evento evento, String dataVencimento, Usuario usuario) {
         this.valorTotal = valorTotal;
-        this.atividades = atividades;
         this.inscricaoPaga = inscricaoPaga;
         this.evento = evento;
         this.dataVencimento = dataVencimento;
         this.usuario = usuario;
     }
 
-    public Double getValorTotal() {
+    public Double calcularValorTotal() {
+        for (int i = 0; i < atividades.size(); i++) {
+            valorTotal += this.atividades.get(i).getValor();
+        }
+
         return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public ArrayList<Atividade> getAtividades() {
-        return atividades;
-    }
-
-    public void setAtividades(ArrayList<Atividade> atividades) {
-        this.atividades = atividades;
     }
 
     public Boolean getInscricaoPaga() {
@@ -59,11 +43,11 @@ class Inscricao {
         this.evento = evento;
     }
 
-    public Date getDataVencimento() {
+    public String getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(Date dataVencimento) {
+    public void setDataVencimento(String dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
@@ -75,22 +59,11 @@ class Inscricao {
         this.usuario = usuario;
     }
 
-    public void encontraQuantidadeTiposAtividade(ArrayList<Atividade> atividades){
-        qtdPalestra = 0;
-        qtdMiniCurso = 0;
-        qtdMesaRedonda = 0;
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
+    }
 
-        for (int i = 0; i < atividades.size(); i++){
-            if (atividades.get(i).getTipoAtividade().equals(TipoAtividade.PALESTRA)){
-                qtdPalestra ++;
-
-            }else if (atividades.get(i).getTipoAtividade().equals(TipoAtividade.MINICURSO)){
-                qtdMiniCurso ++;
-
-            }else if (atividades.get(i).getTipoAtividade().equals(TipoAtividade.MINICURSO)){
-                qtdMesaRedonda ++;
-            }
-        }
-
+    public List<Atividade> getAtividades() {
+        return atividades;
     }
 }

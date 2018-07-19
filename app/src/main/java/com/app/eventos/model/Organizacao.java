@@ -1,11 +1,11 @@
 package com.app.eventos.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Organizacao {
     private String nome;
     private String descricao;
-    private ArrayList<Evento> eventos;
+    private List<Evento> eventos;
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -23,11 +23,11 @@ public class Organizacao {
         return descricao;
     }
 
-    public void setEventos(ArrayList<Evento> eventos) {
+    public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
     }
 
-    public ArrayList<Evento> getEventos() {
+    public List<Evento> getEventos() {
         return eventos;
     }
 }

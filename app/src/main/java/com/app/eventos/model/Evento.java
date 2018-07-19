@@ -5,6 +5,7 @@ import com.app.eventos.dao.ConfiguracaoFirebase;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class Evento implements Serializable {
@@ -14,10 +15,10 @@ public class Evento implements Serializable {
     private String dataFim;
     private String horaInicio;
     private String descricao;
-    private ArrayList<Atividade> atividades;
-    private ArrayList<Inscricao> inscricoes;
-    private ArrayList<Cupom> cupons;
-    private ArrayList<ApoioRealizacao> apoioRealizacoes;
+    private List<Atividade> atividades;
+    private List<Inscricao> inscricoes;
+    private List<Cupom> cupons;
+    private Organizacao organizacao;
     private StatusEvento statusEvento;
     private String local;
 
@@ -91,5 +92,37 @@ public class Evento implements Serializable {
 
     public void setLocal(String local) {
         this.local = local;
+    }
+
+    public void setOrganizacao(Organizacao organizacao) {
+        this.organizacao = organizacao;
+    }
+
+    public Organizacao getOrganizacao() {
+        return organizacao;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void setInscricoes(List<Inscricao> inscricoes) {
+        this.inscricoes = inscricoes;
+    }
+
+    public List<Inscricao> getInscricoes() {
+        return inscricoes;
+    }
+
+    public void setCupons(List<Cupom> cupons) {
+        this.cupons = cupons;
+    }
+
+    public List<Cupom> getCupons() {
+        return cupons;
     }
 }
