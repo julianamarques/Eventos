@@ -48,7 +48,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         final String senha = editSenha.getText().toString().trim();
 
         try {
-            ValidacaoSenha.validarSenha(editSenha, editRedigiteSenha);
+            ValidacaoSenha.validarSeSenhasCoincidem(editSenha, editRedigiteSenha);
 
             auth.createUserWithEmailAndPassword(email, senha)
                     .addOnCompleteListener(CadastroUsuarioActivity.this, new OnCompleteListener<AuthResult>() {

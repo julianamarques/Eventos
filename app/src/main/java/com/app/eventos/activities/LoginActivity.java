@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
@@ -39,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = editLoginEmail.getText().toString().trim();
         String senha = editLoginSenha.getText().toString().trim();
 
+        Snackbar.make(view, "Logando...", Snackbar.LENGTH_SHORT).show();
+
         auth.signInWithEmailAndPassword(email, senha)
                 .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -51,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                             Snackbar.make(view, "Não foi possível logar!", Snackbar.LENGTH_SHORT).show();
                         }
                     }
-                });
+        });
     }
 
     @OnClick(R.id.btn_abrir_cadastro_usuario)

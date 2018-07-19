@@ -134,6 +134,21 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.menu_login) {
             startActivity(new Intent(this, LoginActivity.class));
+
+            auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = auth.getCurrentUser();
+
+                    if (user != null) {
+                        item.setVisible(false);
+                    }
+
+                    else {
+                        item.setVisible(true);
+                    }
+                }
+            });
         }
 
         else if (id == R.id.menu_minhas_inscricoes) {
@@ -150,6 +165,21 @@ public class MainActivity extends AppCompatActivity
 
         else if (id == R.id.menu_sair) {
             auth.signOut();
+
+            auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = auth.getCurrentUser();
+
+                    if (user == null) {
+                        item.setVisible(false);
+                    }
+
+                    else {
+                        item.setVisible(true);
+                    }
+                }
+            });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

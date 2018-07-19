@@ -1,4 +1,4 @@
-#Wed Jul 18 02:47:37 BRT 2018
-base.0=/home/juliana/Repositorios/Eventos/app/build/intermediates/transforms/dexMerger/debug/16
+#Wed Jul 18 23:20:50 BRT 2018
+base.0=/home/juliana/Repositorios/Eventos/app/build/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex
