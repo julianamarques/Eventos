@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth auth;
     private EventosAdapter eventosAdapter;
     private int positionEvento;
+    private EventoController eventoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
+        eventoController = new EventoController();
         positionEvento = getIntent().getIntExtra("idEvento", -1);
     }
 
@@ -82,30 +84,7 @@ public class MainActivity extends AppCompatActivity
         recyclerEventos.setAdapter(eventosAdapter);
         recyclerEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerEventos.setHasFixedSize(true);
-        eventosAdapter = new EventosAdapter(this, listarEventos());
-    }
-
-    public List<Evento> listarEventos() {
-        final List<Evento> eventos = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Evento evento = objSnapshot.getValue(Evento.class);
-                    eventos.add(evento);
-                }
-
-                eventosAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return eventos;
+        eventosAdapter = new EventosAdapter(this, eventoController.listarEventos());
     }
 
     @Override

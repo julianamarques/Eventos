@@ -28,6 +28,27 @@ public class EventoController {
         ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(evento.getId()).setValue(evento, idUser);
     }
 
+    public List<Evento> listarEventos() {
+        final List<Evento> eventos = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Evento evento = objSnapshot.getValue(Evento.class);
+                    eventos.add(evento);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return eventos;
+    }
+
     public List<Evento> listarMeusEventos(FirebaseAuth auth) {
         final List<Evento> meusEventos = new ArrayList<>();
 
