@@ -1,7 +1,7 @@
 package com.app.eventos.model;
 
 public enum StatusEvento {
-    INSCRICOES_ABERTAS(0), EM_ANDAMENTO(1), REALIZADO(2);
+    CRIADO(0), INSCRICOES_ABERTAS(1), EM_ANDAMENTO(2), REALIZADO(3);
 
     private int statusEvento;
 
