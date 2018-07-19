@@ -78,7 +78,7 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
         bundle.putSerializable("evento", evento);
 
         itemView.setOnClickListener(view -> {
-            context.startActivity(new Intent(context, InscricaoActivity.class).putExtras(bundle).putExtra("positionEvento", position));
+            context.startActivity(new Intent(context, InscricaoActivity.class).putExtras(bundle));
         });
     }
 }

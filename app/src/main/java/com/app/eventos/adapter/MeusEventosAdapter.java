@@ -76,7 +76,7 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         bundle.putSerializable("evento", evento);
 
         itemView.setOnClickListener(view -> {
-            context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtras(bundle).putExtra("positionEvento", position));
+            context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtras(bundle));
         });
     }
 }
