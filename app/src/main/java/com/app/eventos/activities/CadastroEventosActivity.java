@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.app.eventos.R;
-import com.app.eventos.controllers.EventoController;
+import com.app.eventos.dao.EventoDAO;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
 import com.app.eventos.fragments.DatePickerDataFimFragment;
 import com.app.eventos.fragments.DatePickerDataInicioFragment;
@@ -30,7 +30,7 @@ public class CadastroEventosActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private String idUser;
-    private EventoController eventoController;
+    private EventoDAO eventoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class CadastroEventosActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        eventoController = new EventoController();
+        eventoDAO = new EventoDAO();
     }
 
     @OnClick(R.id.btn_data_inicio_evento)
@@ -72,7 +72,7 @@ public class CadastroEventosActivity extends AppCompatActivity {
 
         try {
             ValidacaoCadastroEventoCampoVazio.validarCampoVazio(nome, descricao, local, dataInicio, horaInicio, dataFim);
-            eventoController.cadastrarEvento(nome, dataInicio, dataFim, horaInicio, descricao, local, idUser);
+            eventoDAO.cadastrarEvento(nome, dataInicio, dataFim, horaInicio, descricao, local, idUser);
             finish();
         }
 

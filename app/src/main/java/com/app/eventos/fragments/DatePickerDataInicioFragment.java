@@ -8,10 +8,8 @@ import android.support.design.widget.TextInputEditText;
 import android.widget.DatePicker;
 
 import com.app.eventos.R;
-import com.app.eventos.utils.FormatacaoData;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class DatePickerDataInicioFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     TextInputEditText editData;
