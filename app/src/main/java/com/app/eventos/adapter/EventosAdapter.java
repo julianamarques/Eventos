@@ -10,11 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.eventos.R;
-import com.app.eventos.activities.DetalhesEventoActivity;
 import com.app.eventos.activities.InscricaoActivity;
 import com.app.eventos.model.Evento;
-import com.app.eventos.utils.FormatacaoData;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
