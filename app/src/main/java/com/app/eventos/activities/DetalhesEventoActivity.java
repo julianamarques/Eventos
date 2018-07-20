@@ -24,7 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetalhesEventoActivity extends AppCompatActivity {
+public class    DetalhesEventoActivity extends AppCompatActivity {
     @BindView(R.id.txt_ver_evento) protected TextView txtVerEvento;
 
     private Evento evento;
