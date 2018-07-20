@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -18,9 +19,10 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_nome_evento"
-            android:layout_width="match_parent"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:hint="@string/nome_do_evento"/>
+            android:hint="@string/nome_do_evento"
+            android:layout_gravity="center"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -30,9 +32,10 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_descricao_do_evento"
-            android:layout_width="match_parent"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:hint="@string/descricao_do_evento"/>
+            android:hint="@string/descricao_do_evento"
+            android:layout_gravity="center"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -42,16 +45,18 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_local_evento"
-            android:layout_width="match_parent"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
-            android:hint="@string/local_do_evento"/>
+            android:hint="@string/local_do_evento"
+            android:layout_gravity="center"/>
 
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -59,7 +64,7 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edit_data_inicio_evento"
-                android:layout_width="300dp"
+                android:layout_width="282dp"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:hint="@string/data_do_inicio_do_evento"/>
@@ -68,16 +73,18 @@
 
         <Button
             android:id="@+id/btn_data_inicio_evento"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_my_events"/>
+            android:drawableLeft="@drawable/ic_my_events"
+            android:backgroundTint="@color/colorPrimary"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -85,7 +92,7 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edit_hora_inicio_evento"
-                android:layout_width="300dp"
+                android:layout_width="282dp"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:hint="@string/hora_do_início_do_evento"/>
@@ -94,16 +101,18 @@
 
         <Button
             android:id="@+id/btn_hora_inicio_evento"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_clock"/>
+            android:drawableLeft="@drawable/ic_clock"
+            android:backgroundTint="@color/colorPrimary"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -111,7 +120,7 @@
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/edit_data_fim_evento"
-                android:layout_width="300dp"
+                android:layout_width="282dp"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:hint="@string/data_do_fim_do_evento"/>
@@ -120,17 +129,22 @@
 
         <Button
             android:id="@+id/btn_data_fim_evento"
-            android:layout_width="wrap_content"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_my_events"/>
+            android:drawableLeft="@drawable/ic_my_events"
+            android:backgroundTint="@color/colorPrimary"/>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_salvar_evento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/salvar"/>
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:text="@string/salvar"
+        android:backgroundTint="@color/colorVerdeEscuro"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/colorWhite"/>
     </LinearLayout>
 
 </ScrollView>

@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_elogo_foreground"
+        android:icon="@mipmap/ic_logo_icon_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_logo_icon_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.SplashActivity">
@@ -22,10 +22,22 @@
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.CadastroUsuarioActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.CadastroEventosActivity" />
-        <activity android:name=".activities.MeusEventosActivity" />
+        <activity
+            android:name=".activities.CadastroUsuarioActivity"
+            android:label="@string/cadastro"
+            android:parentActivityName=".activities.LoginActivity"/>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/login2"
+            android:parentActivityName=".activities.MainActivity"/>
+        <activity
+            android:name=".activities.CadastroEventosActivity"
+            android:label="@string/cadastro_evento"
+            android:parentActivityName=".activities.MeusEventosActivity"/>
+        <activity
+            android:name=".activities.MeusEventosActivity"
+            android:label="@string/title_tela_meus_eventos"
+            android:parentActivityName=".activities.MainActivity"/>
         <activity
             android:name=".activities.InscricaoActivity"
             android:label="@string/title_activity_inscricao"

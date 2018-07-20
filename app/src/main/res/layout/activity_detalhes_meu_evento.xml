@@ -42,6 +42,8 @@
         android:text="@string/editar"
         app:layout_anchor="@id/toolbar_layout_meu_evento"
         android:layout_marginRight="20dp"
-        app:layout_anchorGravity="bottom|end"/>
+        app:layout_anchorGravity="bottom|end"
+        android:backgroundTint="@color/colorPadraoEscuro"
+        android:textColor="@color/colorWhite"/>
 
 </android.support.design.widget.CoordinatorLayout>
