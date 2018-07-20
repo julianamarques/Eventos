@@ -8,14 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.app.eventos.R;
-import com.app.eventos.controllers.UsuarioController;
+import com.app.eventos.dao.UsuarioDAO;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
 import com.app.eventos.utils.ValidacaoSenha;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +26,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     @BindView(R.id.edit_senha) protected TextInputEditText editSenha;
     @BindView(R.id.edit_redigite_senha) protected TextInputEditText editRedigiteSenha;
 
-    private UsuarioController usuarioController;
+    private UsuarioDAO usuarioDAO;
     private FirebaseAuth auth;
     private String idUser;
 
@@ -37,7 +36,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_usuario);
         ButterKnife.bind(this);
 
-        usuarioController = new UsuarioController();
+        usuarioDAO = new UsuarioDAO();
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
     }
 
@@ -56,7 +55,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 idUser = auth.getUid();
-                                usuarioController.cadastrarUsuario(nome, email, senha, idUser);
+                                usuarioDAO.cadastrarUsuario(nome, email, senha, idUser);
                                 finish();
                             }
 
