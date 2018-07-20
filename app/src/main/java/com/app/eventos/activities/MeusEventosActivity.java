@@ -1,6 +1,7 @@
 package com.app.eventos.activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,8 +10,16 @@ import android.support.v7.widget.RecyclerView;
 import com.app.eventos.R;
 import com.app.eventos.adapter.MeusEventosAdapter;
 import com.app.eventos.controllers.EventoController;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
+import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,18 +40,42 @@ public class MeusEventosActivity extends AppCompatActivity {
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
         eventoController = new EventoController();
-        meusEventosAdapter = new MeusEventosAdapter(this, eventoController.listarMeusEventos(auth));
-        meusEventosAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        meusEventosAdapter = new MeusEventosAdapter(this, listarMeusEventos(auth));
         recyclerMeusEventos.setAdapter(meusEventosAdapter);
         recyclerMeusEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerMeusEventos.setHasFixedSize(true);
+    }
 
+    public List<Evento> listarMeusEventos(FirebaseAuth auth) {
+        final List<Evento> meusEventos = new ArrayList<>();
+        String usuarioId = auth.getUid();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByPriority().equalTo(usuarioId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                meusEventos.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Evento evento = objSnapshot.getValue(Evento.class);
+                    meusEventos.add(evento);
+                }
+
+                meusEventosAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return meusEventos;
     }
 
     @OnClick(R.id.fab_adicionar_eventos)

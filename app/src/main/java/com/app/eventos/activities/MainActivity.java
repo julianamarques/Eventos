@@ -27,6 +27,7 @@ import com.app.eventos.adapter.EventosAdapter;
 import com.app.eventos.controllers.EventoController;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
+import com.app.eventos.dao.UsuarioDAO;
 import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -81,10 +82,11 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
+        eventosAdapter = new EventosAdapter(this, listarEventos());
         recyclerEventos.setAdapter(eventosAdapter);
         recyclerEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerEventos.setHasFixedSize(true);
-        eventosAdapter = new EventosAdapter(this, listarEventos());
+
     }
 
     public List<Evento> listarEventos() {
@@ -93,6 +95,8 @@ public class MainActivity extends AppCompatActivity
         ConfiguracaoFirebase.getDatabaseReference().child("eventos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventos.clear();
+
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Evento evento = objSnapshot.getValue(Evento.class);
                     eventos.add(evento);
@@ -136,21 +140,6 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.menu_login) {
             startActivity(new Intent(this, LoginActivity.class));
-
-            auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-                @Override
-                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    FirebaseUser user = auth.getCurrentUser();
-
-                    if (user != null) {
-                        item.setVisible(false);
-                    }
-
-                    else {
-                        item.setVisible(true);
-                    }
-                }
-            });
         }
 
         else if (id == R.id.menu_minhas_inscricoes) {
@@ -167,21 +156,6 @@ public class MainActivity extends AppCompatActivity
 
         else if (id == R.id.menu_sair) {
             auth.signOut();
-
-            auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-                @Override
-                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    FirebaseUser user = auth.getCurrentUser();
-
-                    if (user == null) {
-                        item.setVisible(false);
-                    }
-
-                    else {
-                        item.setVisible(true);
-                    }
-                }
-            });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -190,15 +164,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void CriarEvento(MenuItem item) {
-
+    public void criarEvento(MenuItem item) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         if (user == null) {
             startActivity(new Intent(this, LoginActivity.class));
-        } else {
-            startActivity(new Intent(this, CadastroEventosActivity.class));
         }
 
+        else {
+            startActivity(new Intent(this, CadastroEventosActivity.class));
+        }
     }
 }

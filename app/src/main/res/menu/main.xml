@@ -6,6 +6,5 @@
         android:orderInCategory="100"
         android:title="@string/criar"
         app:showAsAction="always"
-        android:onClick="CriarEvento"/>
-    />
+        android:onClick="criarEvento"/>
 </menu>
