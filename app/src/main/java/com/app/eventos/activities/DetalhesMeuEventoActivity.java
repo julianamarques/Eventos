@@ -41,7 +41,7 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(evento.getNome());
         tvInformacoesMeuEvento.setText(evento.getDescricao() + "\n\n" + "Local: " + evento.getLocal()
                 + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Hora de realização: " + evento.getHoraInicio()
-                + "\n" + "Data de termino: " + evento.getDataFim() + "\n" + "Status: " + evento.getStatusEvento());
+                + "\n" + "Data de término: " + evento.getDataFim() + "\n" + "Status: " + evento.getStatusEvento());
     }
 
 }

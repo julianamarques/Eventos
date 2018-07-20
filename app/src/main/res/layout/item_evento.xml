@@ -5,45 +5,57 @@
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_margin="8dp"
     android:elevation="@dimen/cardview_compat_inset_shadow"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|top">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-    
-        <TextView
-            android:id="@+id/txt_nome_evento"
+        android:orientation="horizontal">
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold" />
+            android:src="@mipmap/ic_logo_imagem_foreground" />
 
-        <TextView
-            android:id="@+id/txt_descricao_evento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/txt_local_evento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_nome_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txt_data_inicio_evento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_local_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp" />
 
-        <TextView
-            android:id="@+id/txt_hora_inicio_evento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_data_inicio_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp" />
 
-        <TextView
-            android:id="@+id/txt_data_fim_evento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txt_data_fim_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp" />
+
+
+        </LinearLayout>
+
 
 
     </LinearLayout>

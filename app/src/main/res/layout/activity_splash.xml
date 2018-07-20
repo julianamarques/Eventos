@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SplashActivity">
+    tools:context=".activities.SplashActivity"
+    android:background="@color/colorPadraoEscuro">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_elogo_foreground"
+        android:src="@mipmap/ic_logo_icon_foreground"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="135dp"/>
 
