@@ -1,7 +1,5 @@
 package com.app.eventos.model;
 
-import com.app.eventos.dao.ConfiguracaoFirebase;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,7 +20,7 @@ public class Evento implements Serializable {
 
     public Evento() {}
 
-    public Evento(String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local) {
+    public Evento(String id, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local) {
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -30,7 +28,7 @@ public class Evento implements Serializable {
         this.descricao = descricao;
         this.local = local;
         this.statusEvento = StatusEvento.CRIADO;
-        this.id = ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().getKey();
+        this.id = id;
     }
 
     public String getId() {

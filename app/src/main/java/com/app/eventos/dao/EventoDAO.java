@@ -18,7 +18,8 @@ public class EventoDAO {
     public EventoDAO() {}
 
     public void cadastrarEvento(String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, String idUser) {
-        evento = new Evento(nome, dataInicio, dataFim, horaInicio, descricao, local);
+        String id = ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().getKey();
+        evento = new Evento(id, nome, dataInicio, dataFim, horaInicio, descricao, local);
 
         ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(evento.getId()).setValue(evento, idUser);
     }
