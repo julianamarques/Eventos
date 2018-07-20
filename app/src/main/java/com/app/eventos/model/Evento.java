@@ -3,8 +3,6 @@ package com.app.eventos.model;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -31,6 +29,7 @@ public class Evento implements Serializable {
         this.horaInicio = horaInicio;
         this.descricao = descricao;
         this.local = local;
+        this.statusEvento = StatusEvento.CRIADO;
         this.id = ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().getKey();
     }
 

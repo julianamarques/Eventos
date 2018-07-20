@@ -15,7 +15,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetalhesMeuEventoActivity extends AppCompatActivity {
-
     @BindView(R.id.tv_informacoes_meu_evento) protected TextView tvInformacoesMeuEvento;
 
     private Evento evento;
@@ -40,7 +39,9 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
         super.onResume();
 
         getSupportActionBar().setTitle(evento.getNome());
-        tvInformacoesMeuEvento.setText(evento.getDescricao() + "\n\n" + "Local: " + evento.getLocal() + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Hora de realização: " + evento.getHoraInicio() + "\n" + "Data de termino: " + evento.getDataFim());
+        tvInformacoesMeuEvento.setText(evento.getDescricao() + "\n\n" + "Local: " + evento.getLocal()
+                + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Hora de realização: " + evento.getHoraInicio()
+                + "\n" + "Data de termino: " + evento.getDataFim() + "\n" + "Status: " + evento.getStatusEvento());
     }
 
 }
