@@ -14,9 +14,9 @@ import com.app.eventos.model.Evento;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class InscricaoActivity extends AppCompatActivity {
+public class DetalhesMeuEventoActivity extends AppCompatActivity {
 
-    @BindView(R.id.tv_informacoes_evento) protected TextView tvInformacoesEventos;
+    @BindView(R.id.tv_informacoes_meu_evento) protected TextView tvInformacoesMeuEvento;
 
     private Evento evento;
     private int positionEvento;
@@ -24,7 +24,7 @@ public class InscricaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscricao);
+        setContentView(R.layout.activity_detalhes_meu_evento);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
@@ -40,6 +40,7 @@ public class InscricaoActivity extends AppCompatActivity {
         super.onResume();
 
         getSupportActionBar().setTitle(evento.getNome());
-        tvInformacoesEventos.setText(evento.getDescricao() + "\n\n" + "Local: " + evento.getLocal() + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Hora de realização: " + evento.getHoraInicio() + "\n" + "Data de termino: " + evento.getDataFim());
+        tvInformacoesMeuEvento.setText(evento.getDescricao() + "\n\n" + "Local: " + evento.getLocal() + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Hora de realização: " + evento.getHoraInicio() + "\n" + "Data de termino: " + evento.getDataFim());
     }
+
 }

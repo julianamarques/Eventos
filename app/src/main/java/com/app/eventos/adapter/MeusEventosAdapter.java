@@ -3,7 +3,6 @@ package com.app.eventos.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.eventos.R;
-import com.app.eventos.activities.DetalhesEventoActivity;
+import com.app.eventos.activities.DetalhesMeuEventoActivity;
 import com.app.eventos.model.Evento;
 
 import java.util.List;
@@ -76,7 +75,7 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         bundle.putSerializable("evento", evento);
 
         itemView.setOnClickListener(view -> {
-            context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtras(bundle));
+            context.startActivity(new Intent(context, DetalhesMeuEventoActivity.class).putExtras(bundle));
         });
     }
 }

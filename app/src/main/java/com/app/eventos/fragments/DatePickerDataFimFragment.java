@@ -35,31 +35,31 @@ public class DatePickerDataFimFragment extends DialogFragment implements DatePic
         editData = getActivity().findViewById(R.id.edit_data_fim_evento);
 
         if (diaSelecionado < 10) {
-            editData.setText("0" + diaSelecionado + "/" + mesSelecionado + "/" + anoSelecionado);
+            editData.setText("0" + diaSelecionado + "/" + (mesSelecionado + 1) + "/" + anoSelecionado);
         }
 
         else if (mesSelecionado < 10) {
-            editData.setText(diaSelecionado + "/" + "0" + mesSelecionado + "/" + anoSelecionado);
+            editData.setText(diaSelecionado + "/" + "0" + (mesSelecionado + 1) + "/" + anoSelecionado);
         }
 
         else if (anoSelecionado < 10) {
-            editData.setText(diaSelecionado + "/" + mesSelecionado + "/" + "0" + anoSelecionado);
+            editData.setText(diaSelecionado + "/" + (mesSelecionado + 1) + "/" + "0" + anoSelecionado);
         }
 
         else if (diaSelecionado < 10 && mesSelecionado < 10) {
-            editData.setText("0" + diaSelecionado + "/" + "0" +mesSelecionado + "/" + anoSelecionado);
+            editData.setText("0" + diaSelecionado + "/" + "0" + (mesSelecionado + 1) + "/" + anoSelecionado);
         }
 
         else if (mesSelecionado < 10 && anoSelecionado < 10) {
-            editData.setText("0" + diaSelecionado + "/" + mesSelecionado + "/" + "0" +anoSelecionado);
+            editData.setText(diaSelecionado + "/" + "0" + (mesSelecionado + 1) + "/" + "0" +anoSelecionado);
         }
 
         else if (diaSelecionado < 10 && anoSelecionado < 10) {
-            editData.setText("0" + diaSelecionado + "/" + mesSelecionado + "/" + "0" + anoSelecionado);
+            editData.setText("0" + diaSelecionado + "/" + (mesSelecionado + 1) + "/" + "0" + anoSelecionado);
         }
 
         else {
-            editData.setText(diaSelecionado + "/" + mesSelecionado + "/" + anoSelecionado);
+            editData.setText(diaSelecionado + "/" + (mesSelecionado + 1) + "/" + anoSelecionado);
         }
     }
 }

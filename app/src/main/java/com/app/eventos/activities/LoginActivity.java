@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            Snackbar.make(view, "Login realizado!", Snackbar.LENGTH_SHORT).show();
                             finish();
                         }
 
