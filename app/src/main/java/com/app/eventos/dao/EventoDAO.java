@@ -1,4 +1,4 @@
-package com.app.eventos.controllers;
+package com.app.eventos.dao;
 
 import android.support.annotation.NonNull;
 
@@ -12,10 +12,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventoController {
+public class EventoDAO {
     private Evento evento;
 
-    public EventoController() {}
+    public EventoDAO() {}
 
     public void cadastrarEvento(String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, String idUser) {
         evento = new Evento(nome, dataInicio, dataFim, horaInicio, descricao, local);

@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.MeusEventosAdapter;
-import com.app.eventos.controllers.EventoController;
+import com.app.eventos.dao.EventoDAO;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
 import com.app.eventos.model.Evento;
@@ -29,7 +29,7 @@ public class MeusEventosActivity extends AppCompatActivity {
     @BindView(R.id.rv_lista_meus_eventos) protected RecyclerView recyclerMeusEventos;
 
     private FirebaseAuth auth;
-    private EventoController eventoController;
+    private EventoDAO eventoDAO;
     private MeusEventosAdapter meusEventosAdapter;
 
     @Override
@@ -39,7 +39,7 @@ public class MeusEventosActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        eventoController = new EventoController();
+        eventoDAO = new EventoDAO();
     }
 
     @Override

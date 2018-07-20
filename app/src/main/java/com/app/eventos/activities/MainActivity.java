@@ -3,12 +3,8 @@ package com.app.eventos.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,34 +13,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.EventosAdapter;
-import com.app.eventos.controllers.EventoController;
+import com.app.eventos.dao.EventoDAO;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
-import com.app.eventos.dao.UsuarioDAO;
 import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth auth;
     private EventosAdapter eventosAdapter;
     private int positionEvento;
-    private EventoController eventoController;
+    private EventoDAO eventoDAO;
 
 
     @Override
@@ -74,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        eventoController = new EventoController();
+        eventoDAO = new EventoDAO();
         positionEvento = getIntent().getIntExtra("idEvento", -1);
     }
 
