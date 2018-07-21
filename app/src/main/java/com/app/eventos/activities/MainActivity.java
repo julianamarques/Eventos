@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.EventosAdapter;
@@ -25,6 +26,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +75,6 @@ public class MainActivity extends AppCompatActivity
         recyclerEventos.setAdapter(eventosAdapter);
         recyclerEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerEventos.setHasFixedSize(true);
-
     }
 
     public List<Evento> listarEventos() {
