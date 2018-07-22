@@ -78,6 +78,8 @@
         android:textColor="@color/colorWhite"
         android:backgroundTint="@color/colorVerdeEscuro"
         android:layout_marginTop="50dp"/>
-    </LinearLayout>
 
+
+
+    </LinearLayout>
 </ScrollView>
