@@ -121,4 +121,11 @@
     <string name="login">Login</string>
     <string name="cadastro_evento">Cadastro de Evento</string>
     <string name="title_tela_meus_eventos">Meus Eventos</string>
+    <string name="descri_o">Descrição</string>
+    <string name="hora_de_in_cio">Hora de início</string>
+    <string name="data">Data</string>
+    <string name="nome_titulo">Nome/Titulo</string>
+    <string name="tipo">Tipo</string>
+    <string name="valor">Valor</string>
+    <string name="respons_vel">Responsável</string>
 </resources>
