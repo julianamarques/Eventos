@@ -26,7 +26,7 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
     @BindView(R.id.edit_data_atividade) protected EditText editDataAtividade;
     @BindView(R.id.edit_hora_atividade) protected EditText editHoraAtividade;
     @BindView(R.id.edit_descricao_atividade) protected EditText editDescricaoAtividade;
-    @BindView(R.id.edit_tipo_atividade) protected EditText editTipoAtividade;
+    //@BindView(R.id.edit_tipo_atividade) protected EditText editTipoAtividade;
     @BindView(R.id.edit_valor_atividade) protected EditText editValorAtividade;
     @BindView(R.id.edit_responsavel_atividade) protected EditText editResponsavelAtividade;
 
@@ -65,16 +65,16 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
         String data = editDataAtividade.getText().toString().trim();
         String hora = editHoraAtividade.getText().toString().trim();
         String descricao = editDescricaoAtividade.getText().toString().trim();
-        String tipoAtividade = editTipoAtividade.getText().toString().trim();
+        //String tipoAtividade = editTipoAtividade.getText().toString().trim();
         String valor = editValorAtividade.getText().toString().trim();
         String responsavel = editResponsavelAtividade.getText().toString().trim();
         idEvento = evento.getId();
 
         try {
-            ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
-            atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
-            finish();
-            Toast.makeText(this,"Atividade Cadastrada!",Toast.LENGTH_SHORT).show();
+            //ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
+            //atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
+            //finish();
+            //Toast.makeText(this,"Atividade Cadastrada!",Toast.LENGTH_SHORT).show();
         }
 
         catch (IllegalArgumentException e) {

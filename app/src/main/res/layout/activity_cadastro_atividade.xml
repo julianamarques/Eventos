@@ -27,7 +27,7 @@
 
             <EditText
                 android:id="@+id/edit_data_atividade"
-                android:layout_width="320dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/data"
                 android:focusable="false"
@@ -50,7 +50,7 @@
 
             <EditText
                 android:id="@+id/edit_hora_atividade"
-                android:layout_width="320dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/hora_de_in_cio"
                 android:focusable="false"
@@ -73,13 +73,50 @@
             android:inputType="textShortMessage"
             />
 
-        <EditText
-            android:id="@+id/edit_tipo_atividade"
+
+        <TextView
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tipo"
-            android:inputType="textAutoComplete"
-            />
+            android:text="Tipo da atividade"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radio_atividade_palestra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/palestra"/>
+            </RadioGroup>
+
+            <RadioButton
+                android:id="@+id/radio_atividade_minicurso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minicurso"/>
+
+            <RadioButton
+                android:id="@+id/radio_atividade_mesa_redonda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mesa_redonda"/>
+
+
+        </LinearLayout>
+
+
 
         <EditText
             android:id="@+id/edit_valor_atividade"
@@ -103,7 +140,8 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/salvar"/>
+            android:text="@string/salvar"
+            android:backgroundTint="@color/colorPrimary"/>
 
     </LinearLayout>
 </ScrollView>
