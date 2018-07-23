@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.dao.AtividadeDAO;
@@ -73,6 +74,7 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
             ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
             atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
             finish();
+            Toast.makeText(this,"Atividade Cadastrada!",Toast.LENGTH_SHORT).show();
         }
 
         catch (IllegalArgumentException e) {

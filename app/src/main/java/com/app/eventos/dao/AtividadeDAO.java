@@ -14,6 +14,6 @@ public class AtividadeDAO {
         String id = ConfiguracaoFirebase.getDatabaseReference().child("atividades").push().getKey();
         atividade = new Atividade(id, nome, data, hora, descricao, tipoAtividade, valor, responsavel);
 
-        ConfiguracaoFirebase.getDatabaseReference().child("atividades").child(atividade.getId()).setValue(atividade, id);
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(idUser).child("atividades").child(atividade.getId()).setValue(atividade);
     }
 }
