@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/nome_atividade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nome_titulo"
+        android:inputType="textShortMessage"
+        />
+
+    <EditText
+        android:id="@+id/data_atividade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/data"
+        android:inputType="date"
+        />
+
+    <EditText
+        android:id="@+id/hoa_atividade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hora_de_in_cio"
+        android:inputType="time"
+        />
+
+    <EditText
+        android:id="@+id/descricao_atividade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/descri_o"
+        android:inputType="textShortMessage"
+        />
+
+    <EditText
+        android:id="@+id/tipo_atividade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/tipo"
+        android:inputType="textAutoComplete"
+        />
+
+    <EditText
+        android:id="@+id/valor_atividade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/valor"
+        android:inputType="numberDecimal"
+
+        />
+
+    <EditText
+        android:id="@+id/responsavel_atividade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/respons_vel"
+        android:inputType="textShortMessage"
+        />
+
+
+
+</LinearLayout>

@@ -33,17 +33,22 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_inscricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inscreva-se"
+            android:backgroundTint="@color/colorPadraoEscuro"
+            android:textColor="@color/colorWhite"
+            android:layout_alignParentBottom="true"
+             />
+    </RelativeLayout>
+
     <include layout="@layout/content_inscricao" />
 
-    <Button
-        android:id="@+id/btn_inscricao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inscreva-se"
-        app:layout_anchor="@id/toolbar_layout_inscricao"
-        android:layout_marginRight="20dp"
-        app:layout_anchorGravity="bottom|end"
-        android:backgroundTint="@color/colorPadraoEscuro"
-        android:textColor="@color/colorWhite"/>
 
 </android.support.design.widget.CoordinatorLayout>

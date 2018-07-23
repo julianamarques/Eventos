@@ -42,6 +42,6 @@ public class InscricaoActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(evento.getNome());
         tvInformacoesEventos.setText("\n" + evento.getDescricao() + "\n\n" + "Local: " + evento.getLocal() +
                 "\n\n" +"Status: " + evento.getStatusEvento() + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Data de termino: " + evento.getDataFim()+ "\n" + "Hora de realização: " +
-                evento.getHoraInicio() + "\n");
+                evento.getHoraInicio() + "\n\n\n\n");
     }
 }

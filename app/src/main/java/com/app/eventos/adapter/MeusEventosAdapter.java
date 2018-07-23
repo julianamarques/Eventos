@@ -1,13 +1,18 @@
 package com.app.eventos.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.activities.DetalhesMeuEventoActivity;
@@ -58,7 +63,46 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         holder.txtDataFimEvento.setText(evento.getDataFim());
 
         configurarClickCurto(holder.itemView, evento, position);
+        configurarClickLongo(holder.itemView, position);
+
     }
+
+    private void configurarClickLongo(View itemView, int position) {
+        final Evento evento = this.meusEventos.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("evento", evento);
+
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(context, v);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu_evento, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener((MenuItem item) -> {
+                    switch (item.getItemId()) {
+                        case R.id.btn_adicionar_atividade:
+                            adicionarAtividade(v, evento, position);
+                            break;
+
+                        case R.id.btn_editar_evento:
+                            editarEvento(v, evento, position);
+                            break;
+
+                        case R.id.btn_excluir_evento:
+                            excluirEvento(v, evento, position);
+                            break;
+                    }
+                    return false;
+                });
+
+                popupMenu.show();
+                return true;
+            }
+        });
+
+    }
+
 
     @Override
     public int getItemCount() {
@@ -73,5 +117,36 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         itemView.setOnClickListener(view -> {
             context.startActivity(new Intent(context, DetalhesMeuEventoActivity.class).putExtras(bundle));
         });
+    }
+
+    public void adicionarAtividade(View v, Evento evento, final int position){
+        Toast.makeText(context, "MT hora nessa calma...", Toast.LENGTH_SHORT).show();
+    }
+
+    public void editarEvento(View v, Evento evento, final int position){
+        Toast.makeText(context, "MT hora nessa calma...", Toast.LENGTH_SHORT).show();
+    }
+
+    public void excluirEvento(View v, Evento evento, final int position){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.context);
+
+        builder.setTitle("EventosAPP");
+        builder.setMessage("Deseja remover " + evento.getNome()+ " permanentemente?");
+        builder.setPositiveButton("SIM", (dialog, which) -> {
+            this.meusEventos.remove(evento);
+
+
+            //this.anuncioBox.remove(evento);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, getItemCount());
+            Snackbar.make(v, "Evento " + evento.getNome() + " removido",
+                    Snackbar.LENGTH_LONG).show();
+
+        });
+        builder.setNegativeButton("NÃO", (dialog, which) -> {
+            Snackbar.make(v, "Evento não removido", Snackbar.LENGTH_LONG).show();
+        });
+
+        builder.create().show();
     }
 }
