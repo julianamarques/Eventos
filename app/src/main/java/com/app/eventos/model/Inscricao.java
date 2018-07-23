@@ -21,7 +21,8 @@ class Inscricao {
 
     public Double calcularValorTotal() {
         for (int i = 0; i < atividades.size(); i++) {
-            valorTotal += this.atividades.get(i).getValor();
+            Double valorDouble = Double.parseDouble(atividades.get(i).getValor().replaceAll("\\.","").replace(",","."));
+            valorTotal += valorDouble;
         }
 
         return valorTotal;

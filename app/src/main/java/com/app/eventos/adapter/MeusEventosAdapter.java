@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.eventos.R;
+import com.app.eventos.activities.CadastroAtividadeActivity;
 import com.app.eventos.activities.DetalhesMeuEventoActivity;
 import com.app.eventos.model.Evento;
 
@@ -51,6 +52,7 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         MeusEventosAdapter.ViewHolder viewHolder = new MeusEventosAdapter.ViewHolder(view);
 
         return viewHolder;
+
     }
 
     @Override
@@ -120,7 +122,13 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
     }
 
     public void adicionarAtividade(View v, Evento evento, final int position){
-        Toast.makeText(context, "MT hora nessa calma...", Toast.LENGTH_SHORT).show();
+        evento = this.meusEventos.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("evento", evento);
+
+       context.startActivity(new Intent(context, CadastroAtividadeActivity.class).putExtras(bundle));
+
+
     }
 
     public void editarEvento(View v, Evento evento, final int position){

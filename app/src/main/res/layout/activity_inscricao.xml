@@ -34,21 +34,21 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btn_inscricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Inscreva-se"
-            android:backgroundTint="@color/colorPadraoEscuro"
-            android:textColor="@color/colorWhite"
-            android:layout_alignParentBottom="true"
-             />
-    </RelativeLayout>
+    <include layout="@layout/content_inscricao"
+        android:id="@+id/layout_scroll"/>
 
-    <include layout="@layout/content_inscricao" />
+    <Button
+        android:id="@+id/btn_inscricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inscreva-se"
+        android:backgroundTint="@color/colorPadraoEscuro"
+        android:textColor="@color/colorWhite"
+        app:layout_anchor="@id/layout_scroll"
+        app:layout_anchorGravity="bottom"
+        android:clickable="true"
+        android:focusable="true"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>

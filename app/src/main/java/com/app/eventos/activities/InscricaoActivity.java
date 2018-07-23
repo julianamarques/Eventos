@@ -1,5 +1,6 @@
 package com.app.eventos.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,4 +45,5 @@ public class InscricaoActivity extends AppCompatActivity {
                 "\n\n" +"Status: " + evento.getStatusEvento() + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Data de termino: " + evento.getDataFim()+ "\n" + "Hora de realização: " +
                 evento.getHoraInicio() + "\n\n\n\n");
     }
+
 }

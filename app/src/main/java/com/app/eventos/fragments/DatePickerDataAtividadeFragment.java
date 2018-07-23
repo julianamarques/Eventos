@@ -6,13 +6,14 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.widget.DatePicker;
+import android.widget.EditText;
 
 import com.app.eventos.R;
 
 import java.util.Calendar;
 
-public class DatePickerDataInicioFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-    TextInputEditText editData;
+public class DatePickerDataAtividadeFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    EditText editData;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class DatePickerDataInicioFragment extends DialogFragment implements Date
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
         int ano = calendar.get(Calendar.YEAR);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), this, dia, mes, ano);
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
 
@@ -30,7 +32,7 @@ public class DatePickerDataInicioFragment extends DialogFragment implements Date
 
     @Override
     public void onDateSet(DatePicker view, int anoSelecionado, int mesSelecionado, int diaSelecionado) {
-        editData = getActivity().findViewById(R.id.edit_data_inicio_evento);
+        editData = getActivity().findViewById(R.id.edit_data_atividade);
 
         if (diaSelecionado < 10) {
             editData.setText("0" + diaSelecionado + "/" + (mesSelecionado + 1) + "/" + anoSelecionado);
