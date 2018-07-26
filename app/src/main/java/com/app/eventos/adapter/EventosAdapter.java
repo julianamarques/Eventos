@@ -29,9 +29,8 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txt_nome_evento) TextView txtNomeEvento;
-        @BindView(R.id.txt_local_evento) TextView txtLocalEvento;
-        @BindView(R.id.txt_data_inicio_evento) TextView txtDataInicioEvento;
-        @BindView(R.id.txt_data_fim_evento) TextView txtDataFimEvento;
+        @BindView(R.id.txt_descricao_evento) TextView txtDescricaoEvento;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -53,9 +52,7 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
         final Evento evento = this.eventos.get(position);
 
         holder.txtNomeEvento.setText(evento.getNome());
-        holder.txtLocalEvento.setText(evento.getLocal());
-        holder.txtDataInicioEvento.setText(evento.getDataInicio());
-        holder.txtDataFimEvento.setText(evento.getDataFim());
+        holder.txtDescricaoEvento.setText(evento.getDescricao());
 
         configurarClickCurto(holder.itemView, evento, position);
     }

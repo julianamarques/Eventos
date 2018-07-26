@@ -6,7 +6,7 @@
     android:layout_margin="8dp"
     android:elevation="@dimen/cardview_compat_inset_shadow"
     android:layout_width="330dp"
-    android:layout_height="wrap_content"
+    android:layout_height="250dp"
     android:layout_gravity="center|top">
 
 
@@ -14,45 +14,37 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_logo_imagem_foreground" />
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:src="@drawable/eventt"/>
 
         <LinearLayout
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
+            android:layout_width="270dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_margin="5dp"
             android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/txt_nome_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp" />
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_local_evento"
+                android:id="@+id/txt_descricao_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:layout_marginTop="5dp" />
-
-            <TextView
-                android:id="@+id/txt_data_inicio_evento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp" />
-
-            <TextView
-                android:id="@+id/txt_data_fim_evento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12dp" />
+                android:layout_marginTop="5dp"
+                android:maxLines="2"
+                android:ellipsize="end" />
 
 
         </LinearLayout>

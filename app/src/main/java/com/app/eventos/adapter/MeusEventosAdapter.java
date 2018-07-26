@@ -35,9 +35,7 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txt_nome_evento) TextView txtNomeEvento;
-        @BindView(R.id.txt_local_evento) TextView txtLocalEvento;
-        @BindView(R.id.txt_data_inicio_evento) TextView txtDataInicioEvento;
-        @BindView(R.id.txt_data_fim_evento) TextView txtDataFimEvento;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -60,9 +58,7 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         final Evento evento = this.meusEventos.get(position);
 
         holder.txtNomeEvento.setText(evento.getNome());
-        holder.txtLocalEvento.setText(evento.getLocal());
-        holder.txtDataInicioEvento.setText(evento.getDataInicio());
-        holder.txtDataFimEvento.setText(evento.getDataFim());
+
 
         configurarClickCurto(holder.itemView, evento, position);
         configurarClickLongo(holder.itemView, position);
