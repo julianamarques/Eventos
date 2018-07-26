@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.design.widget.NavigationView;
@@ -126,27 +127,47 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         int id = item.getItemId();
 
         if (id == R.id.menu_login) {
-            startActivity(new Intent(this, LoginActivity.class));
+            if (user == null) {
+                startActivity(new Intent(this, LoginActivity.class));
+
+            }else {
+                Toast.makeText(this,"Você já está logado!",Toast.LENGTH_SHORT).show();
+            }
         }
 
         else if (id == R.id.menu_minhas_inscricoes) {
+            if (user == null) {
+                Toast.makeText(this, "Faça o login para acessar minhas inscrições", Toast.LENGTH_SHORT).show();
 
+            }
         }
 
         else if (id == R.id.menu_meus_eventos) {
-            startActivity(new Intent(this, MeusEventosActivity.class));
-        }
+
+                if (user == null) {
+                    Toast.makeText(this,"Faça o login para acessar meus eventos",Toast.LENGTH_SHORT).show();
+
+                }else{
+                    startActivity(new Intent(this, MeusEventosActivity.class));
+                }
+            }
 
         else if (id == R.id.menu_config) {
 
         }
 
         else if (id == R.id.menu_sair) {
-            auth.signOut();
-            Toast.makeText(this,"Usuário deslogado!",Toast.LENGTH_SHORT).show();
+            if (user == null){
+                Toast.makeText(this,"Você não está logado",Toast.LENGTH_SHORT).show();
+            }else{
+
+                auth.signOut();
+                Toast.makeText(this,"Usuário deslogado!",Toast.LENGTH_SHORT).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

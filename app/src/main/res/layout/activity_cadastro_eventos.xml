@@ -22,7 +22,8 @@
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:hint="@string/nome_do_evento"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:inputType="textShortMessage"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -35,7 +36,8 @@
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:hint="@string/descricao_do_evento"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:inputType="textShortMessage"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -48,7 +50,8 @@
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:hint="@string/local_do_evento"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:inputType="textShortMessage"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -67,7 +70,8 @@
                 android:layout_width="282dp"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                android:hint="@string/data_do_inicio_do_evento"/>
+                android:hint="@string/data_do_inicio_do_evento"
+                />
 
         </android.support.design.widget.TextInputLayout>
 

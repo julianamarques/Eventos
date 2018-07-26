@@ -19,6 +19,43 @@
             android:inputType="textShortMessage"
             />
 
+
+
+        <EditText
+            android:id="@+id/edit_descricao_atividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/descri_o"
+            android:inputType="textShortMessage"
+            />
+
+        <EditText
+            android:id="@+id/edit_tipo_atividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tipo"
+            android:inputType="textShortMessage"
+
+            />
+
+
+        <EditText
+            android:id="@+id/edit_valor_atividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/valor"
+            android:inputType="numberDecimal"
+
+            />
+
+        <EditText
+            android:id="@+id/edit_responsavel_atividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/respons_vel"
+            android:inputType="textShortMessage"
+            />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,43 +99,6 @@
                 android:drawableLeft="@drawable/ic_clock"
                 android:backgroundTint="@color/colorPrimary"/>
         </LinearLayout>
-
-
-
-        <EditText
-            android:id="@+id/edit_descricao_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/descri_o"
-            android:inputType="textShortMessage"
-            />
-
-        <EditText
-            android:id="@+id/edit_tipo_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/tipo"
-            android:inputType="textShortMessage"
-
-            />
-
-
-        <EditText
-            android:id="@+id/edit_valor_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/valor"
-            android:inputType="numberDecimal"
-
-            />
-
-        <EditText
-            android:id="@+id/edit_responsavel_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/respons_vel"
-            android:inputType="textShortMessage"
-            />
 
         <Button
             android:id="@+id/btn_salvar_atividade"

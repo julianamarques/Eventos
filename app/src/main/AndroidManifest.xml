@@ -46,7 +46,9 @@
             android:name=".activities.DetalhesMeuEventoActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.CadastroAtividadeActivity"></activity>
+        <activity android:name=".activities.CadastroAtividadeActivity"
+            android:label="Cadastro de atividades"
+            android:parentActivityName=".activities.MeusEventosActivity"></activity>
     </application>
 
 </manifest>
