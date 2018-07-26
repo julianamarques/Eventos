@@ -7,9 +7,8 @@ public class Atividade {
     private String data;
     private String hora;
     private String descricao;
-    private String tipoAtividade;
+    private TipoAtividade tipoAtividade;
     private String valor;
-    private Evento evento;
     private String responsavel;
 
     public Atividade() {}
@@ -19,10 +18,13 @@ public class Atividade {
         this.data = data;
         this.hora = hora;
         this.descricao = descricao;
-        this.tipoAtividade = tipoAtividade;
         this.valor = valor;
         this.responsavel = responsavel;
         this.id = id;
+        setTipoAtividade(tipoAtividade);
+
+
+
     }
 
     public String getId() {
@@ -57,12 +59,25 @@ public class Atividade {
         this.descricao = descricao;
     }
 
-    public String getTipoAtividade() {
+    public TipoAtividade getTipoAtividade() {
         return tipoAtividade;
     }
 
     public void setTipoAtividade(String tipoAtividade) {
-        this.tipoAtividade = tipoAtividade;
+        switch (tipoAtividade){
+            case "palestra":
+                this.tipoAtividade = TipoAtividade.PALESTRA;
+                break;
+
+            case "minicurso":
+                this.tipoAtividade = TipoAtividade.MINICURSO;
+                break;
+
+            case "mesaredonda":
+                this.tipoAtividade = TipoAtividade.MESA_REDONDA;
+                break;
+
+        }
     }
 
     public String getValor() {
@@ -89,4 +104,7 @@ public class Atividade {
         return data;
     }
 
+    public void setandoTipoAtividade(String tipoAtividadeString){
+
+    }
 }

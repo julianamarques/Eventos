@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.app.eventos.R;
@@ -26,7 +27,7 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
     @BindView(R.id.edit_data_atividade) protected EditText editDataAtividade;
     @BindView(R.id.edit_hora_atividade) protected EditText editHoraAtividade;
     @BindView(R.id.edit_descricao_atividade) protected EditText editDescricaoAtividade;
-    //@BindView(R.id.edit_tipo_atividade) protected EditText editTipoAtividade;
+    @BindView(R.id.edit_tipo_atividade) protected EditText editTipoAtividade;
     @BindView(R.id.edit_valor_atividade) protected EditText editValorAtividade;
     @BindView(R.id.edit_responsavel_atividade) protected EditText editResponsavelAtividade;
 
@@ -34,6 +35,7 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
     private Evento evento;
     private String idEvento;
     private int positionEvento;
+    String tipoAtividade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,30 +61,30 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
     }
 
 
+
     @OnClick(R.id.btn_salvar_atividade)
     public void salvarAtividade(View view) {
         String nome = editNomeAtividade.getText().toString().trim();
         String data = editDataAtividade.getText().toString().trim();
         String hora = editHoraAtividade.getText().toString().trim();
         String descricao = editDescricaoAtividade.getText().toString().trim();
-        //String tipoAtividade = editTipoAtividade.getText().toString().trim();
+        String tipoAtividade = editTipoAtividade.getText().toString().trim();
         String valor = editValorAtividade.getText().toString().trim();
         String responsavel = editResponsavelAtividade.getText().toString().trim();
+
         idEvento = evento.getId();
 
         try {
-            //ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
-            //atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
-            //finish();
-            //Toast.makeText(this,"Atividade Cadastrada!",Toast.LENGTH_SHORT).show();
+            ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
+            atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
+            finish();
+            Toast.makeText(this,"Atividade Cadastrada!",Toast.LENGTH_SHORT).show();
         }
 
         catch (IllegalArgumentException e) {
             Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT).show();
         }
     }
-
-
 
 
 }
