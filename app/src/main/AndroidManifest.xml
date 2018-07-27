@@ -25,19 +25,19 @@
         <activity
             android:name=".activities.CadastroUsuarioActivity"
             android:label="@string/cadastro"
-            android:parentActivityName=".activities.LoginActivity"/>
+            android:parentActivityName=".activities.LoginActivity" />
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/login2"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.CadastroEventosActivity"
             android:label="@string/cadastro_evento"
-            android:parentActivityName=".activities.MeusEventosActivity"/>
+            android:parentActivityName=".activities.MeusEventosActivity" />
         <activity
             android:name=".activities.MeusEventosActivity"
             android:label="@string/title_tela_meus_eventos"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.InscricaoActivity"
             android:label="@string/title_activity_inscricao"
@@ -45,7 +45,10 @@
         <activity
             android:name=".activities.DetalhesMeuEventoActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.CadastroAtividadeActivity"
+            android:label="Cadastro de atividades"
+            android:parentActivityName=".activities.MeusEventosActivity"></activity>
     </application>
 
 </manifest>

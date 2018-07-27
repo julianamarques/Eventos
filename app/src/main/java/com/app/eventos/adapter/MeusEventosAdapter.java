@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.eventos.R;
+import com.app.eventos.activities.CadastroAtividadeActivity;
 import com.app.eventos.activities.DetalhesMeuEventoActivity;
 import com.app.eventos.model.Evento;
 
@@ -34,9 +35,7 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txt_nome_evento) TextView txtNomeEvento;
-        @BindView(R.id.txt_local_evento) TextView txtLocalEvento;
-        @BindView(R.id.txt_data_inicio_evento) TextView txtDataInicioEvento;
-        @BindView(R.id.txt_data_fim_evento) TextView txtDataFimEvento;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -51,6 +50,7 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         MeusEventosAdapter.ViewHolder viewHolder = new MeusEventosAdapter.ViewHolder(view);
 
         return viewHolder;
+
     }
 
     @Override
@@ -58,9 +58,7 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         final Evento evento = this.meusEventos.get(position);
 
         holder.txtNomeEvento.setText(evento.getNome());
-        holder.txtLocalEvento.setText(evento.getLocal());
-        holder.txtDataInicioEvento.setText(evento.getDataInicio());
-        holder.txtDataFimEvento.setText(evento.getDataFim());
+
 
         configurarClickCurto(holder.itemView, evento, position);
         configurarClickLongo(holder.itemView, position);
@@ -120,7 +118,13 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
     }
 
     public void adicionarAtividade(View v, Evento evento, final int position){
-        Toast.makeText(context, "MT hora nessa calma...", Toast.LENGTH_SHORT).show();
+        evento = this.meusEventos.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("evento", evento);
+
+       context.startActivity(new Intent(context, CadastroAtividadeActivity.class).putExtras(bundle));
+
+
     }
 
     public void editarEvento(View v, Evento evento, final int position){

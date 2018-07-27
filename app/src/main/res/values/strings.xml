@@ -128,4 +128,7 @@
     <string name="tipo">Tipo</string>
     <string name="valor">Valor</string>
     <string name="respons_vel">Responsável</string>
+    <string name="palestra">Palestra</string>
+    <string name="minicurso">MiniCurso</string>
+    <string name="mesa_redonda">Mesa Redonda</string>
 </resources>

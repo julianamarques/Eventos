@@ -73,6 +73,9 @@ public class CadastroEventosActivity extends AppCompatActivity {
         try {
             ValidacaoCadastroEventoCampoVazio.validarCampoVazio(nome, descricao, local, dataInicio, horaInicio, dataFim);
             eventoDAO.cadastrarEvento(nome, dataInicio, dataFim, horaInicio, descricao, local, idUser);
+
+            Snackbar.make(view, "Conclua o cadastro em Meus eventos", Snackbar.LENGTH_SHORT).show();
+
             finish();
         }
 
