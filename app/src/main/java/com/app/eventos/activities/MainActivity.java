@@ -165,8 +165,19 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(this,"Você não está logado",Toast.LENGTH_SHORT).show();
             }else{
 
-                auth.signOut();
-                Toast.makeText(this,"Usuário deslogado!",Toast.LENGTH_SHORT).show();
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+
+                builder.setTitle("EventosAPP");
+                builder.setMessage("Deseja mesmo sair da sua conta?");
+                builder.setPositiveButton("SIM", (dialog, which) -> {
+                    auth.signOut();
+                    Toast.makeText(this,"Usuário deslogado!",Toast.LENGTH_SHORT).show();
+                });
+                builder.setNegativeButton("NÃO", (dialog, which) -> {
+                });
+
+                builder.create().show();
+
             }
         }
 
