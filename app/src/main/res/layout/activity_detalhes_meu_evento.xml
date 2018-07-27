@@ -35,5 +35,4 @@
 
     <include layout="@layout/content_detalhes_meu_evento" />
 
-
 </android.support.design.widget.CoordinatorLayout>
