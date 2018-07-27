@@ -27,15 +27,15 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
     @BindView(R.id.edit_data_atividade) protected EditText editDataAtividade;
     @BindView(R.id.edit_hora_atividade) protected EditText editHoraAtividade;
     @BindView(R.id.edit_descricao_atividade) protected EditText editDescricaoAtividade;
-    @BindView(R.id.edit_tipo_atividade) protected EditText editTipoAtividade;
+    //@BindView(R.id.edit_tipo_atividade) protected EditText editTipoAtividade;
     @BindView(R.id.edit_valor_atividade) protected EditText editValorAtividade;
     @BindView(R.id.edit_responsavel_atividade) protected EditText editResponsavelAtividade;
+    @BindView(R.id.radio_group_atividade) protected RadioGroup radioGroup;
 
     private AtividadeDAO atividadeDAO;
     private Evento evento;
     private String idEvento;
     private int positionEvento;
-    String tipoAtividade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +68,28 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
         String data = editDataAtividade.getText().toString().trim();
         String hora = editHoraAtividade.getText().toString().trim();
         String descricao = editDescricaoAtividade.getText().toString().trim();
-        String tipoAtividade = editTipoAtividade.getText().toString().trim();
         String valor = editValorAtividade.getText().toString().trim();
         String responsavel = editResponsavelAtividade.getText().toString().trim();
+
+        int idRadioButtonChecked = radioGroup.getCheckedRadioButtonId();
+        TipoAtividade tipoAtividade = null;
+
+        if (idRadioButtonChecked == R.id.radio_mesa_redonda) {
+            tipoAtividade = TipoAtividade.MESA_REDONDA;
+        }
+
+        else if (idRadioButtonChecked == R.id.radio_palestra) {
+            tipoAtividade = TipoAtividade.PALESTRA;
+        }
+
+        else if(idRadioButtonChecked == R.id.radio_mini_curso) {
+            tipoAtividade = TipoAtividade.MINICURSO;
+        }
 
         idEvento = evento.getId();
 
         try {
-            ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
+            ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, idRadioButtonChecked, valor, responsavel, idEvento);
             atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
             finish();
             Toast.makeText(this,"Atividade Cadastrada!",Toast.LENGTH_SHORT).show();

@@ -16,27 +16,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nome_titulo"
-            android:inputType="textShortMessage"
-            />
-
-
+            android:inputType="textShortMessage" />
 
         <EditText
             android:id="@+id/edit_descricao_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/descri_o"
-            android:inputType="textShortMessage"
-            />
+            android:inputType="textShortMessage" />
 
-        <EditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipo"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_atividade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_mesa_redonda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mesa_redonda" />
+
+            <RadioButton
+                android:id="@+id/radio_palestra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/palestra" />
+
+            <RadioButton
+                android:id="@+id/radio_mini_curso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minicurso"/>
+
+        </RadioGroup>
+
+        <!--<EditText
             android:id="@+id/edit_tipo_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tipo"
-            android:inputType="textShortMessage"
-
-            />
+            android:inputType="textShortMessage" />-->
 
 
         <EditText
