@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.app.eventos.R;
 import com.app.eventos.activities.CadastroAtividadeActivity;
 import com.app.eventos.activities.DetalhesMeuEventoActivity;
+import com.app.eventos.dao.EventoDAO;
 import com.app.eventos.model.Evento;
 
 import java.util.List;
@@ -27,6 +28,8 @@ import butterknife.ButterKnife;
 public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.ViewHolder>{
     private Context context;
     private List<Evento> meusEventos;
+    private EventoDAO eventoDAO;
+
 
     public MeusEventosAdapter(Context context, List<Evento> meusEventos) {
         this.context = context;
@@ -137,10 +140,9 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         builder.setTitle("EventosAPP");
         builder.setMessage("Deseja remover " + evento.getNome()+ " permanentemente?");
         builder.setPositiveButton("SIM", (dialog, which) -> {
+            eventoDAO = new EventoDAO();
+            eventoDAO.deletarEvento(evento.getId());
             this.meusEventos.remove(evento);
-
-
-            //this.anuncioBox.remove(evento);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, getItemCount());
             Snackbar.make(v, "Evento " + evento.getNome() + " removido",
@@ -153,4 +155,5 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
 
         builder.create().show();
     }
+
 }

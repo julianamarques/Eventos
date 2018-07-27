@@ -23,4 +23,8 @@ public class EventoDAO {
 
         ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(evento.getId()).setValue(evento, idUser);
     }
+
+    public void deletarEvento(String eventoId){
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).removeValue();
+    }
 }
