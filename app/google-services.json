@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "25448206573",
+    "firebase_url": "https://eventos-b0d3b.firebaseio.com",
+    "project_id": "eventos-b0d3b",
+    "storage_bucket": "eventos-b0d3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25448206573:android:1b110120259e80fd",
+        "android_client_info": {
+          "package_name": "com.app.eventos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25448206573-ocj7fenbdrvnns4ohmrdv422ip5nip7r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbzC4pYXub6HD--21lfjaxj2Go69I52Fs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
