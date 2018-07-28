@@ -3,6 +3,7 @@ package com.app.eventos.dao;
 import android.support.annotation.NonNull;
 
 import com.app.eventos.dao.ConfiguracaoFirebase;
+import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,20 @@ public class EventoDAO {
     }
 
     public void deletarEvento(String eventoId){
+        ConfiguracaoFirebase.getDatabaseReference().child("atividades").orderByPriority().equalTo(eventoId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    objSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).removeValue();
     }
 }
