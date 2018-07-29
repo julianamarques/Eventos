@@ -73,7 +73,7 @@ public class Atividade {
     }
 
     public void setResponsavel(String responsavel) {
-        responsavel = responsavel;
+        this.responsavel = responsavel;
     }
 
     public void setData(String data) {

@@ -7,4 +7,5 @@
     <color name="colorPadraoEscuro">#045960</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlue">#CDF2EE</color>
+    <color name="colorBlueEscuro">#0658de</color>
 </resources>

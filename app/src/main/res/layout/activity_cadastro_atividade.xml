@@ -37,6 +37,7 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:checked="true"
                 android:id="@+id/radio_mesa_redonda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,20 +66,20 @@
 
 
         <EditText
+            android:id="@+id/edit_responsavel_atividade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/respons_vel"
+            android:inputType="textShortMessage"
+            />
+
+        <EditText
             android:id="@+id/edit_valor_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/valor"
             android:inputType="numberDecimal"
 
-            />
-
-        <EditText
-            android:id="@+id/edit_responsavel_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/respons_vel"
-            android:inputType="textShortMessage"
             />
 
         <LinearLayout

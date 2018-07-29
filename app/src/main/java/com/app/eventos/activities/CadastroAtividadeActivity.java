@@ -88,6 +88,7 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
 
         idEvento = evento.getId();
 
+
         try {
             ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, idRadioButtonChecked, valor, responsavel, idEvento);
             atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
