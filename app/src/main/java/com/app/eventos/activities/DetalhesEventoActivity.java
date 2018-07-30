@@ -1,17 +1,18 @@
 package com.app.eventos.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.AtividadeAdapter;
-import com.app.eventos.adapter.InscricaoEventoAdapter;
 import com.app.eventos.dao.AtividadeDAO;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
@@ -28,30 +29,32 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class InscricaoActivity extends AppCompatActivity {
-    @BindView(R.id.rv_lista_atividades_inscricao) protected RecyclerView recyclerInscricao;
-    @BindView(R.id.tv_valor_total) protected TextView tvValorTotal;
+public class DetalhesEventoActivity extends AppCompatActivity {
+
+    @BindView(R.id.tv_informacoes_evento) protected TextView tvInformacoesEventos;
+    @BindView(R.id.tv_descricao_evento) protected TextView tvDescricaoEventos;
+    @BindView(R.id.rv_lista_atividade) protected RecyclerView recyclerMeusEventos;
+    @BindView(R.id.btn_inscricao) protected Button btnInscricao;
 
 
     private Evento evento;
     private int positionEvento;
     private FirebaseAuth auth;
     private AtividadeDAO atividadeDAO;
-    private InscricaoEventoAdapter inscricaoEventoAdapter;
-    private List<Atividade> atividades;
+    private AtividadeAdapter atividadeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscricao);
+        setContentView(R.layout.activity_detalhes_evento);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
         positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
         atividadeDAO = new AtividadeDAO();
-
-
 
 
     }
@@ -69,7 +72,7 @@ public class InscricaoActivity extends AppCompatActivity {
                     atividades.add(atividade);
                 }
 
-                inscricaoEventoAdapter.notifyDataSetChanged();
+                atividadeAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -81,21 +84,37 @@ public class InscricaoActivity extends AppCompatActivity {
         return atividades;
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
 
-        inscricaoEventoAdapter = new InscricaoEventoAdapter(this, listarAtividades(evento.getId()));
-        recyclerInscricao.setAdapter(inscricaoEventoAdapter);
-        recyclerInscricao.setLayoutManager(new LinearLayoutManager(this));
-        recyclerInscricao.setHasFixedSize(true);
-        InscricaoEventoAdapter inscricaoEventoAdapter = new InscricaoEventoAdapter(this, listarAtividades(evento.getId()));
-        double valorTotal = inscricaoEventoAdapter.valorTotalInscricao();
-        tvValorTotal.setText("Valor: R$" + valorTotal);
+        atividadeAdapter = new AtividadeAdapter(this, listarAtividades(evento.getId()));
+        recyclerMeusEventos.setAdapter(atividadeAdapter);
+        recyclerMeusEventos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerMeusEventos.setHasFixedSize(true);
+
+        btnInscricao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("evento", evento);
+
+                startActivity(new Intent(DetalhesEventoActivity.this, InscricaoActivity.class).putExtras(bundle));
+            }
+        });
 
 
+        setarTextViews(evento, tvDescricaoEventos, tvInformacoesEventos);
 
+
+    }
+
+    private void setarTextViews(Evento evento, TextView tvDescricaoEventos, TextView tvInformacoesEventos) {
+        getSupportActionBar().setTitle(evento.getNome());
+        tvDescricaoEventos.setText("\n" + evento.getDescricao()+"\n\n");
+        tvInformacoesEventos.setText("Local: " + evento.getLocal() +
+                "\n\n" +"Status: " + evento.getStatusEvento() + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Data de termino: " + evento.getDataFim()+ "\n" + "Hora de realização: " +
+                evento.getHoraInicio() + "\n\n\n\n");
     }
 
 

@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.eventos.R;
-import com.app.eventos.activities.InscricaoActivity;
+import com.app.eventos.activities.DetalhesEventoActivity;
 import com.app.eventos.model.Evento;
 
 import java.util.List;
@@ -68,7 +68,7 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
         bundle.putSerializable("evento", evento);
 
         itemView.setOnClickListener(view -> {
-            context.startActivity(new Intent(context, InscricaoActivity.class).putExtras(bundle));
+            context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtras(bundle));
         });
     }
 }
