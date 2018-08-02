@@ -2,26 +2,37 @@ package com.app.eventos.model;
 
 import java.util.List;
 
-class Inscricao {
+public class Inscricao {
 
-    private Double valorTotal;
+    private String id;
+    private double valorTotal;
     private Boolean inscricaoPaga;
     private List<Atividade> atividades;
     private Evento evento;
     private String dataVencimento;
     private Usuario usuario;
 
-    public Inscricao(Double valorTotal, Boolean inscricaoPaga, Evento evento, String dataVencimento, Usuario usuario) {
-        this.valorTotal = valorTotal;
+
+    public Inscricao() {}
+
+    public Inscricao(String id, Boolean inscricaoPaga, List<Atividade> atividades, double valorTotal) {
         this.inscricaoPaga = inscricaoPaga;
-        this.evento = evento;
-        this.dataVencimento = dataVencimento;
-        this.usuario = usuario;
+        this.atividades = atividades;
+        this.id = id;
+        this.valorTotal = valorTotal;
     }
 
-    public Double calcularValorTotal() {
-        for (int i = 0; i < atividades.size(); i++) {
-            Double valorDouble = Double.parseDouble(atividades.get(i).getValor().replaceAll("\\.","").replace(",","."));
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double calcularValorTotal() {
+        for (int i = 0; i < getAtividades().size(); i++) {
+            double valorDouble = getAtividades().get(i).getValor();
             valorTotal += valorDouble;
         }
 

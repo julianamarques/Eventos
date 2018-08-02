@@ -15,6 +15,7 @@ import com.app.eventos.adapter.InscricaoEventoAdapter;
 import com.app.eventos.dao.AtividadeDAO;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
+import com.app.eventos.dao.InscricaoDAO;
 import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,8 +28,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class InscricaoActivity extends AppCompatActivity {
+public class RealizarInscricaoActivity extends AppCompatActivity {
     @BindView(R.id.rv_lista_atividades_inscricao) protected RecyclerView recyclerInscricao;
     @BindView(R.id.tv_valor_total) protected TextView tvValorTotal;
 
@@ -39,6 +41,7 @@ public class InscricaoActivity extends AppCompatActivity {
     private AtividadeDAO atividadeDAO;
     private InscricaoEventoAdapter inscricaoEventoAdapter;
     private List<Atividade> atividades;
+    public InscricaoDAO inscricaoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +53,7 @@ public class InscricaoActivity extends AppCompatActivity {
         evento = (Evento) getIntent().getSerializableExtra("evento");
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
         atividadeDAO = new AtividadeDAO();
-
-
-
-
+        inscricaoDAO = new InscricaoDAO();
     }
 
     public List<Atividade> listarAtividades(String eventoId) {
@@ -91,12 +91,13 @@ public class InscricaoActivity extends AppCompatActivity {
         recyclerInscricao.setLayoutManager(new LinearLayoutManager(this));
         recyclerInscricao.setHasFixedSize(true);
         InscricaoEventoAdapter inscricaoEventoAdapter = new InscricaoEventoAdapter(this, listarAtividades(evento.getId()));
-        double valorTotal = inscricaoEventoAdapter.valorTotalInscricao();
+        double valorTotal = 0.0;
         tvValorTotal.setText("Valor: R$" + valorTotal);
-
-
-
     }
 
-
+    @OnClick(R.id.btn_salvar_inscricao)
+    public void salvarInscricao() {
+        inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid(), inscricaoEventoAdapter.obterValorTotalInscricao());
+        finish();
+    }
 }

@@ -99,7 +99,7 @@ public class DetalhesEventoActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("evento", evento);
 
-                startActivity(new Intent(DetalhesEventoActivity.this, InscricaoActivity.class).putExtras(bundle));
+                startActivity(new Intent(DetalhesEventoActivity.this, RealizarInscricaoActivity.class).putExtras(bundle));
             }
         });
 

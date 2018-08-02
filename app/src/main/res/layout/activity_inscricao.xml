@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.InscricaoActivity"
+    tools:context=".activities.RealizarInscricaoActivity"
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
@@ -24,18 +24,14 @@
         android:layout_gravity="bottom"
         android:layout_marginLeft="10dp"
         android:textSize="30sp"
-        android:maxLength="20"
-        />
+        android:maxLength="20" />
+
     <Button
         android:id="@+id/btn_salvar_inscricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/salvar"
-        android:layout_gravity="bottom|end"
-        />
-
-
-
+        android:layout_gravity="bottom|end" />
 
 
 </android.support.design.widget.CoordinatorLayout>

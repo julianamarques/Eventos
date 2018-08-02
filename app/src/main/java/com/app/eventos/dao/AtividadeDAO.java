@@ -10,7 +10,7 @@ public class AtividadeDAO {
 
     public AtividadeDAO() {}
 
-    public void cadastrarAtividade(String nome, String data, String hora, String descricao, TipoAtividade tipoAtividade, String valor, String responsavel, String idEvento) {
+    public void cadastrarAtividade(String nome, String data, String hora, String descricao, TipoAtividade tipoAtividade, double valor, String responsavel, String idEvento) {
         String id = ConfiguracaoFirebase.getDatabaseReference().child("atividades").push().getKey();
         atividade = new Atividade(id, nome, data, hora, descricao, tipoAtividade, valor, responsavel);
 

@@ -26,8 +26,6 @@ import butterknife.ButterKnife;
 public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEventoAdapter.ViewHolder> {
     @BindView(R.id.btn_salvar_inscricao) protected Button btnSalvarInscricao;
 
-
-
     private Context context;
     private List<Atividade> atividades;
     private AtividadeDAO atividadeDAO;
@@ -80,14 +78,16 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
 
                 if (checkBox.isChecked()){
                     atividadesInscricao.add(atividades.get(position));
-                    Toast.makeText(context,"Teste",Toast.LENGTH_SHORT).show();
-                }else if(!checkBox.isChecked()){
+                    Toast.makeText(context, String.valueOf(obterValorTotalInscricao()), Toast.LENGTH_SHORT).show();
+                }
+
+                else if(!checkBox.isChecked()){
                     atividadesInscricao.remove(atividades.get(position));
                 }
             }
         });
-        configurarClickCurto(holder.itemView, atividade, position);
 
+        configurarClickCurto(holder.itemView, atividade, position);
     }
 
     private void atualizarValorTotal(TextView tvValorTotal) {
@@ -95,19 +95,16 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
         tvValorTotal.setText("Valor Total: R$ " + valorTotal);
     }
 
-    private double obterValorTotalInscricao(){
+    public double obterValorTotalInscricao(){
         double valor = 0;
         if (!atividadesInscricao.isEmpty()){
             for (int i = 0; i< atividadesInscricao.size(); i++){
-                valor += Double.parseDouble(atividadesInscricao.get(i).getValor());
+                valor += atividadesInscricao.get(i).getValor();
             }
         }
 
         return valor;
     }
-
-
-
 
     private void configurarClickCurto(View itemView, Atividade atividade, int position) {
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -124,16 +121,19 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
                 builder.create().show();
             }
         });
-
     }
 
     public double valorTotalInscricao(){
         double valor = 0;
         for (int i = 0; i < atividadesInscricao.size(); i++){
-            valor += Double.parseDouble(atividadesInscricao.get(i).getValor());
+            valor += atividadesInscricao.get(i).getValor();
         }
 
         return valor;
+    }
+
+    public List<Atividade> getAtividadesInscricao() {
+        return atividadesInscricao;
     }
 
     @Override

@@ -50,7 +50,8 @@
             android:name=".activities.CadastroAtividadeActivity"
             android:label="Cadastro de atividades"
             android:parentActivityName=".activities.MeusEventosActivity" />
-        <activity android:name=".activities.InscricaoActivity"></activity>
+        <activity android:name=".activities.RealizarInscricaoActivity" />
+        <activity android:name=".activities.MinhasInscricoesActivity"></activity>
     </application>
 
 </manifest>
