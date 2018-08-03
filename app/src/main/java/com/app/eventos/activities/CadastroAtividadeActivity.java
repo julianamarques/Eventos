@@ -88,7 +88,7 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
 
         try {
             ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, idRadioButtonChecked, valor, responsavel, idEvento);
-            atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, idEvento);
+            atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, evento);
             finish();
             Toast.makeText(this,"Atividade Cadastrada!",Toast.LENGTH_SHORT).show();
         }

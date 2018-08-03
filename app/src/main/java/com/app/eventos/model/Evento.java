@@ -1,7 +1,12 @@
 package com.app.eventos.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Evento implements Serializable {
@@ -11,16 +16,17 @@ public class Evento implements Serializable {
     private String dataFim;
     private String horaInicio;
     private String descricao;
-    private List<Atividade> atividades;
+    private List<Atividade> atividades = new ArrayList<>();
     private List<Inscricao> inscricoes;
     private List<Cupom> cupons;
     private Organizacao organizacao;
     private StatusEvento statusEvento;
     private String local;
+    private String idUser;
 
     public Evento() {}
 
-    public Evento(String id, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local) {
+    public Evento(String id, String idUser, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local) {
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -29,10 +35,19 @@ public class Evento implements Serializable {
         this.local = local;
         this.statusEvento = StatusEvento.CRIADO;
         this.id = id;
+        this.idUser = idUser;
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public String getNome() {
@@ -121,5 +136,23 @@ public class Evento implements Serializable {
 
     public List<Cupom> getCupons() {
         return cupons;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("id", id);
+        result.put("nome", nome);
+        result.put("descricao", descricao);
+        result.put("local", local);
+        result.put("dataInicio", dataInicio);
+        result.put("horaInicio", horaInicio);
+        result.put("dataFim", dataFim);
+        result.put("statusEvento", StatusEvento.CRIADO);
+        result.put("atividades", atividades);
+        result.put("idUser", idUser);
+
+        return  result;
     }
 }

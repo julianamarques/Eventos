@@ -142,7 +142,10 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.menu_minhas_inscricoes) {
             if (user == null) {
                 Toast.makeText(this, "Faça o login para acessar minhas inscrições", Toast.LENGTH_SHORT).show();
+            }
 
+            else {
+                startActivity(new Intent(this, MinhasInscricoesActivity.class));
             }
         }
 

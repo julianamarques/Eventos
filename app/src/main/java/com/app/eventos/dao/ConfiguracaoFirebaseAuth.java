@@ -14,16 +14,4 @@ public class ConfiguracaoFirebaseAuth {
 
         return firebaseAuth;
     }
-
-    public static FirebaseUser getFirebaseUser() {
-        if (firebaseUser == null){
-            firebaseUser = firebaseAuth.getCurrentUser();
-        }
-
-        return firebaseUser;
-    }
-
-    public static void logout() {
-        firebaseAuth.signOut();
-    }
 }

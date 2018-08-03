@@ -123,15 +123,6 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
         });
     }
 
-    public double valorTotalInscricao(){
-        double valor = 0;
-        for (int i = 0; i < atividadesInscricao.size(); i++){
-            valor += atividadesInscricao.get(i).getValor();
-        }
-
-        return valor;
-    }
-
     public List<Atividade> getAtividadesInscricao() {
         return atividadesInscricao;
     }

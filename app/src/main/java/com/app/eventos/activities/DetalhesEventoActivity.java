@@ -62,7 +62,7 @@ public class DetalhesEventoActivity extends AppCompatActivity {
     public List<Atividade> listarAtividades(String eventoId) {
         final List<Atividade> atividades = new ArrayList<>();
 
-        ConfiguracaoFirebase.getDatabaseReference().child("atividades").orderByPriority().equalTo(eventoId).addValueEventListener(new ValueEventListener() {
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 atividades.clear();
@@ -103,10 +103,7 @@ public class DetalhesEventoActivity extends AppCompatActivity {
             }
         });
 
-
         setarTextViews(evento, tvDescricaoEventos, tvInformacoesEventos);
-
-
     }
 
     private void setarTextViews(Evento evento, TextView tvDescricaoEventos, TextView tvInformacoesEventos) {

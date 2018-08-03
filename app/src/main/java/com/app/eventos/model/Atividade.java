@@ -1,6 +1,8 @@
 package com.app.eventos.model;
 
-public class Atividade {
+import java.io.Serializable;
+
+public class Atividade implements Serializable {
 
     private String id;
     private String nome;

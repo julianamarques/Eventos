@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.AtividadeAdapter;
@@ -59,7 +60,7 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
     public List<Atividade> listarAtividades(String eventoId) {
         final List<Atividade> atividades = new ArrayList<>();
 
-        ConfiguracaoFirebase.getDatabaseReference().child("atividades").orderByPriority().equalTo(eventoId).addValueEventListener(new ValueEventListener() {
+    ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 atividades.clear();
@@ -90,14 +91,12 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
         recyclerInscricao.setAdapter(inscricaoEventoAdapter);
         recyclerInscricao.setLayoutManager(new LinearLayoutManager(this));
         recyclerInscricao.setHasFixedSize(true);
-        InscricaoEventoAdapter inscricaoEventoAdapter = new InscricaoEventoAdapter(this, listarAtividades(evento.getId()));
-        double valorTotal = 0.0;
-        tvValorTotal.setText("Valor: R$" + valorTotal);
+        tvValorTotal.setText("Valor: R$" + inscricaoEventoAdapter.obterValorTotalInscricao());
     }
 
     @OnClick(R.id.btn_salvar_inscricao)
     public void salvarInscricao() {
-        inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid(), inscricaoEventoAdapter.obterValorTotalInscricao());
+        inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid());
         finish();
     }
 }

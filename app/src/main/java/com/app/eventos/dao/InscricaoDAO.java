@@ -4,18 +4,22 @@ import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.Inscricao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InscricaoDAO {
     private Inscricao inscricao;
 
     public InscricaoDAO() {}
 
-    public void cadastrarInscricao(Evento evento, List<Atividade> atividadesInscricao, String idUser, double valor) {
+    public void cadastrarInscricao(Evento evento, List<Atividade> atividades, String idUser) {
         String id = ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").push().getKey();
-        String priority = idUser + evento.getId();
-        inscricao = new Inscricao(id, false, atividadesInscricao, valor);
+        inscricao = new Inscricao(id, evento.getId(), idUser, atividades, false);
 
-        ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").child(inscricao.getId()).setValue(inscricao, priority);
+        Map<String, Object> inscricaoValues = inscricao.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/inscricoes/" + id, inscricaoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
     }
 }
