@@ -64,6 +64,7 @@ public class Usuario {
         HashMap<String, Object> result = new HashMap<>();
 
         result.put("nome", nome);
+        result.put("email", email);
         result.put("senha", senha);
 
         return result;
