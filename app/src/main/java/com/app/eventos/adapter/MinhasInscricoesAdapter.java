@@ -75,7 +75,7 @@ public class MinhasInscricoesAdapter extends RecyclerView.Adapter<MinhasInscrico
         return this.minhasInscricoes.size();
     }
 
-    public void exibirNomeEvento(Inscricao inscricao, TextView textView) {
+    private void exibirNomeEvento(Inscricao inscricao, TextView textView) {
 
         for (int i = 0; i < eventos.size(); i++) {
             if (eventos.get(i).getId().equals(inscricao.getIdEvento())) {
