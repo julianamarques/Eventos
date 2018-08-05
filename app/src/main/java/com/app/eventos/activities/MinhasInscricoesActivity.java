@@ -5,16 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.MinhasInscricoesAdapter;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
+import com.app.eventos.dao.InscricaoDAO;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.Inscricao;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class MinhasInscricoesActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private MinhasInscricoesAdapter minhasInscricoesAdapter;
+    private InscricaoDAO inscricaoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +40,18 @@ public class MinhasInscricoesActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
+        inscricaoDAO = new InscricaoDAO();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        minhasInscricoesAdapter = new MinhasInscricoesAdapter(this, listarMinhasInscricoes(auth));
+        minhasInscricoesAdapter = new MinhasInscricoesAdapter(this, listarEventos(), listarMinhasInscricoes(auth));
         reciclerMinhasInscricoes.setAdapter(minhasInscricoesAdapter);
         reciclerMinhasInscricoes.setLayoutManager(new LinearLayoutManager(this));
         reciclerMinhasInscricoes.setHasFixedSize(true);
+        minhasInscricoesAdapter.notifyDataSetChanged();
     }
 
     public List<Inscricao> listarMinhasInscricoes(FirebaseAuth auth) {
@@ -73,4 +79,27 @@ public class MinhasInscricoesActivity extends AppCompatActivity {
 
         return minhasInscricoes;
     }
-}
+
+    public List<Evento> listarEventos() {
+        final List<Evento> eventos = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("nome").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventos.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Evento evento = objSnapshot.getValue(Evento.class);
+                    eventos.add(evento);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return eventos;
+    }
+ }
