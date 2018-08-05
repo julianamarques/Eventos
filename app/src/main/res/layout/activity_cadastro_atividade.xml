@@ -13,28 +13,51 @@
 
         <EditText
             android:id="@+id/edit_nome_atividade"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:hint="@string/nome_titulo"
             android:inputType="textShortMessage" />
 
         <EditText
             android:id="@+id/edit_descricao_atividade"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:hint="@string/descri_o"
             android:inputType="textShortMessage" />
 
+        <EditText
+            android:id="@+id/edit_responsavel_atividade"
+            android:layout_gravity="center"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/respons_vel"
+            android:inputType="textShortMessage"
+            />
+
+        <EditText
+            android:id="@+id/edit_valor_atividade"
+            android:layout_gravity="center"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/valor"
+            android:inputType="numberDecimal"
+
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tipo"/>
+            android:text="@string/tipo"
+            android:layout_gravity="center_horizontal"/>
 
         <RadioGroup
             android:id="@+id/radio_group_atividade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
 
             <RadioButton
                 android:checked="true"
@@ -57,31 +80,6 @@
 
         </RadioGroup>
 
-        <!--<EditText
-            android:id="@+id/edit_tipo_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/tipo"
-            android:inputType="textShortMessage" />-->
-
-
-        <EditText
-            android:id="@+id/edit_responsavel_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/respons_vel"
-            android:inputType="textShortMessage"
-            />
-
-        <EditText
-            android:id="@+id/edit_valor_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/valor"
-            android:inputType="numberDecimal"
-
-            />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,7 +88,7 @@
 
             <EditText
                 android:id="@+id/edit_data_atividade"
-                android:layout_width="300dp"
+                android:layout_width="282dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/data"
                 android:focusable="false"
@@ -113,7 +111,7 @@
 
             <EditText
                 android:id="@+id/edit_hora_atividade"
-                android:layout_width="300dp"
+                android:layout_width="282dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/hora_de_in_cio"
                 android:focusable="false"
