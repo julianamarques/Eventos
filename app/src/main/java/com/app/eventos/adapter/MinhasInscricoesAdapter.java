@@ -43,7 +43,8 @@ public class MinhasInscricoesAdapter extends RecyclerView.Adapter<MinhasInscrico
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.txt_nome_evento_inscrito) TextView txtNomeEventoInscrito;
-        @BindView(R.id.txt_valor_inscricao) TextView valorInscricao;
+        @BindView(R.id.txt_valor_inscricao) TextView txtValorInscricao;
+        @BindView(R.id.txt_situacao_inscricao) TextView txtSituacaoInscricao;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -67,7 +68,15 @@ public class MinhasInscricoesAdapter extends RecyclerView.Adapter<MinhasInscrico
         eventoDAO = new EventoDAO();
 
         exibirNomeEvento(inscricao, holder.txtNomeEventoInscrito);
-        holder.valorInscricao.setText("Valor Total: " + inscricao.calcularValorTotal());
+        holder.txtValorInscricao.setText("Valor Total: " + inscricao.calcularValorTotal());
+        holder.txtSituacaoInscricao.setText("Situação da inscricao: " + situacaoInscricao(inscricao.getInscricaoPaga()));
+    }
+
+    private String situacaoInscricao(Boolean inscricaoPaga) {
+        if(inscricaoPaga){
+            return "Paga";
+        }
+        return "Não paga";
     }
 
     @Override
