@@ -87,11 +87,10 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        inscricaoEventoAdapter = new InscricaoEventoAdapter(this, listarAtividades(evento.getId()));
+        inscricaoEventoAdapter = new InscricaoEventoAdapter(this, listarAtividades(evento.getId()), tvValorTotal);
         recyclerInscricao.setAdapter(inscricaoEventoAdapter);
         recyclerInscricao.setLayoutManager(new LinearLayoutManager(this));
         recyclerInscricao.setHasFixedSize(true);
-        tvValorTotal.setText("Valor: R$" + inscricaoEventoAdapter.obterValorTotalInscricao());
     }
 
     @OnClick(R.id.btn_salvar_inscricao)

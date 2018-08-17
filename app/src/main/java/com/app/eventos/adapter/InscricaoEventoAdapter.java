@@ -28,12 +28,13 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
 
     private Context context;
     private List<Atividade> atividades;
-    private AtividadeDAO atividadeDAO;
     private ArrayList<Atividade> atividadesInscricao = new ArrayList<>();
+    private TextView txtValorInscricao;
 
-    public InscricaoEventoAdapter (Context context, List<Atividade> atividades) {
+    public InscricaoEventoAdapter (Context context, List<Atividade> atividades, TextView txtValorInscricao) {
         this.context = context;
         this.atividades = atividades;
+        this.txtValorInscricao = txtValorInscricao;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -79,6 +80,7 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
                 if (checkBox.isChecked()){
                     atividadesInscricao.add(atividades.get(position));
                     Toast.makeText(context, String.valueOf(obterValorTotalInscricao()), Toast.LENGTH_SHORT).show();
+                    txtValorInscricao.setText("Valor: R$" + obterValorTotalInscricao());
                 }
 
                 else if(!checkBox.isChecked()){
@@ -88,11 +90,6 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
         });
 
         configurarClickCurto(holder.itemView, atividade, position);
-    }
-
-    private void atualizarValorTotal(TextView tvValorTotal) {
-        String valorTotal = String.valueOf(obterValorTotalInscricao());
-        tvValorTotal.setText("Valor Total: R$ " + valorTotal);
     }
 
     public double obterValorTotalInscricao(){
