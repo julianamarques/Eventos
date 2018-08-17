@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/btn_adicionar_atividade"
+        android:title="Adicionar Atividade"/>
+
+    <item
+        android:id="@+id/btn_editar_evento"
+        android:title="Editar"/>
+
+    <item
+        android:id="@+id/btn_excluir_evento"
+        android:title="Excluir"/>
+
+</menu>

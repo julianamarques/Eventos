@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CadastroAtividadeActivity"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit_nome_atividade"
+            android:layout_gravity="center"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/nome_titulo"
+            android:inputType="textShortMessage" />
+
+        <EditText
+            android:id="@+id/edit_descricao_atividade"
+            android:layout_gravity="center"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/descri_o"
+            android:inputType="textShortMessage" />
+
+        <EditText
+            android:id="@+id/edit_responsavel_atividade"
+            android:layout_gravity="center"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/respons_vel"
+            android:inputType="textShortMessage"
+            />
+
+        <EditText
+            android:id="@+id/edit_valor_atividade"
+            android:layout_gravity="center"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/valor"
+            android:inputType="numberDecimal"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipo"
+            android:layout_gravity="center_horizontal"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_atividade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <RadioButton
+                android:checked="true"
+                android:id="@+id/radio_mesa_redonda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mesa_redonda" />
+
+            <RadioButton
+                android:id="@+id/radio_palestra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/palestra" />
+
+            <RadioButton
+                android:id="@+id/radio_mini_curso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minicurso"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/edit_data_atividade"
+                android:layout_width="282dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/data"
+                android:focusable="false"
+                />
+
+            <Button
+                android:id="@+id/btn_data_inicio_atividade"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_my_events"
+                android:backgroundTint="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <EditText
+                android:id="@+id/edit_hora_atividade"
+                android:layout_width="282dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/hora_de_in_cio"
+                android:focusable="false"
+                />
+            <Button
+                android:id="@+id/btn_hora_inicio_atividade"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_clock"
+                android:backgroundTint="@color/colorPrimary"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_salvar_atividade"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/salvar"
+            android:backgroundTint="@color/colorPrimary"/>
+
+    </LinearLayout>
+</ScrollView>
