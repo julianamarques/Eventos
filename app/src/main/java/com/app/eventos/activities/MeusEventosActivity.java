@@ -56,7 +56,7 @@ public class MeusEventosActivity extends AppCompatActivity {
         final List<Evento> meusEventos = new ArrayList<>();
         String usuarioId = auth.getUid();
 
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByPriority().equalTo(usuarioId).addValueEventListener(new ValueEventListener() {
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("idUser").equalTo(usuarioId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 meusEventos.clear();

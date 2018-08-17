@@ -1,6 +1,10 @@
 package com.app.eventos.model;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Usuario {
     private String nome;
@@ -53,5 +57,16 @@ public class Usuario {
 
     public List<Evento> getEventos() {
         return eventos;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("nome", nome);
+        result.put("email", email);
+        result.put("senha", senha);
+
+        return result;
     }
 }

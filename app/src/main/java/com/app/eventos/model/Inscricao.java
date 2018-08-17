@@ -1,28 +1,44 @@
 package com.app.eventos.model;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-class Inscricao {
+public class Inscricao {
 
-    private Double valorTotal;
+    private String id;
+    private double valorTotal;
     private Boolean inscricaoPaga;
     private List<Atividade> atividades;
-    private Evento evento;
     private String dataVencimento;
-    private Usuario usuario;
+    private String idUser;
+    private String idEvento;
 
-    public Inscricao(Double valorTotal, Boolean inscricaoPaga, Evento evento, String dataVencimento, Usuario usuario) {
-        this.valorTotal = valorTotal;
+
+    public Inscricao() {}
+
+    public Inscricao(String id, String idEvento, String idUser, List<Atividade> atividades, Boolean inscricaoPaga) {
         this.inscricaoPaga = inscricaoPaga;
-        this.evento = evento;
-        this.dataVencimento = dataVencimento;
-        this.usuario = usuario;
+        this.atividades = atividades;
+        this.id = id;
+        this.idEvento = idEvento;
+        this.idUser = idUser;
+        this.valorTotal = calcularValorTotal();
     }
 
-    public Double calcularValorTotal() {
-        for (int i = 0; i < atividades.size(); i++) {
-            Double valorDouble = Double.parseDouble(atividades.get(i).getValor().replaceAll("\\.","").replace(",","."));
-            valorTotal += valorDouble;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double calcularValorTotal() {
+        for (int i = 0; i < getAtividades().size(); i++) {
+            valorTotal += getAtividades().get(i).getValor();
         }
 
         return valorTotal;
@@ -36,12 +52,12 @@ class Inscricao {
         this.inscricaoPaga = inscricaoPaga;
     }
 
-    public Evento getEvento() {
-        return evento;
+    public void setIdEvento(String idEvento) {
+        this.idEvento = idEvento;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public String getIdEvento() {
+        return idEvento;
     }
 
     public String getDataVencimento() {
@@ -52,12 +68,12 @@ class Inscricao {
         this.dataVencimento = dataVencimento;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public String getIdUser() {
+        return idUser;
     }
 
     public void setAtividades(List<Atividade> atividades) {
@@ -66,5 +82,19 @@ class Inscricao {
 
     public List<Atividade> getAtividades() {
         return atividades;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("id", id);
+        result.put("valor", valorTotal);
+        result.put("atividades", atividades);
+        result.put("inscricaoPaga", inscricaoPaga);
+        result.put("idUser", idUser);
+        result.put("idEvento", idEvento);
+
+        return result;
     }
 }

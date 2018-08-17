@@ -1,6 +1,8 @@
 package com.app.eventos.model;
 
-public class Atividade {
+import java.io.Serializable;
+
+public class Atividade implements Serializable {
 
     private String id;
     private String nome;
@@ -8,12 +10,12 @@ public class Atividade {
     private String hora;
     private String descricao;
     private TipoAtividade tipoAtividade;
-    private String valor;
+    private double valor;
     private String responsavel;
 
     public Atividade() {}
 
-    public Atividade(String id, String nome, String data, String hora, String descricao, TipoAtividade tipoAtividade, String valor, String responsavel) {
+    public Atividade(String id, String nome, String data, String hora, String descricao, TipoAtividade tipoAtividade, double valor, String responsavel) {
         this.nome = nome;
         this.data = data;
         this.hora = hora;
@@ -60,11 +62,11 @@ public class Atividade {
         return tipoAtividade;
     }
 
-    public String getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
@@ -73,7 +75,7 @@ public class Atividade {
     }
 
     public void setResponsavel(String responsavel) {
-        responsavel = responsavel;
+        this.responsavel = responsavel;
     }
 
     public void setData(String data) {

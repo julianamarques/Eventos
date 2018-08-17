@@ -39,16 +39,19 @@
             android:label="@string/title_tela_meus_eventos"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.InscricaoActivity"
+            android:name=".activities.DetalhesEventoActivity"
             android:label="@string/title_activity_inscricao"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.DetalhesMeuEventoActivity"
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.CadastroAtividadeActivity"
+        <activity
+            android:name=".activities.CadastroAtividadeActivity"
             android:label="Cadastro de atividades"
-            android:parentActivityName=".activities.MeusEventosActivity"></activity>
+            android:parentActivityName=".activities.MeusEventosActivity" />
+        <activity android:name=".activities.RealizarInscricaoActivity" />
+        <activity android:name=".activities.MinhasInscricoesActivity"></activity>
     </application>
 
 </manifest>

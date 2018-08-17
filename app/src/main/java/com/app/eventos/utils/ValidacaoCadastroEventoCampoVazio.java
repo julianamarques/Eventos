@@ -11,8 +11,8 @@ public class ValidacaoCadastroEventoCampoVazio {
         }
     }
 
-    public static void validarCampoVazioAtividade(String nome, String data, String hora, String descricao, int idRadioButtonChecked, String valor, String responsavel, String idUser) {
-        if (nome.isEmpty() || descricao.isEmpty() || data.isEmpty() || hora.isEmpty() || (idRadioButtonChecked == -1) || valor.isEmpty() || responsavel.isEmpty() || idUser.isEmpty()) {
+    public static void validarCampoVazioAtividade(String nome, String data, String hora, String descricao, int idRadioButtonChecked, double valor, String responsavel, String idUser) {
+        if (nome.isEmpty() || descricao.isEmpty() || data.isEmpty() || hora.isEmpty() || (idRadioButtonChecked == -1) || String.valueOf(valor).isEmpty() || responsavel.isEmpty() || idUser.isEmpty()) {
             throw new IllegalArgumentException("Há campos vazios!");
         }
     }

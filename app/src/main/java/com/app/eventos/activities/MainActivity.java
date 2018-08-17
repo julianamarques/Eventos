@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
     public List<Evento> listarEventos() {
         final List<Evento> eventos = new ArrayList<>();
 
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").addValueEventListener(new ValueEventListener() {
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("nome").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 eventos.clear();
@@ -142,7 +142,10 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.menu_minhas_inscricoes) {
             if (user == null) {
                 Toast.makeText(this, "Faça o login para acessar minhas inscrições", Toast.LENGTH_SHORT).show();
+            }
 
+            else {
+                startActivity(new Intent(this, MinhasInscricoesActivity.class));
             }
         }
 
