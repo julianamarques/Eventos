@@ -16,7 +16,7 @@ public class UsuarioDAO {
     public UsuarioDAO() {}
 
     public void cadastrarUsuario(String nome, String email, String senha, String idUser) {
-        usuario = new Usuario(nome, email, senha);
+        usuario = new Usuario(idUser, nome, email, senha);
 
         Map<String, Object> usuarioValues = usuario.toMap();
         Map<String, Object> childUpdates = new HashMap<>();

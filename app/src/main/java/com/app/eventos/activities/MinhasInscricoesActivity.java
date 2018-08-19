@@ -51,7 +51,6 @@ public class MinhasInscricoesActivity extends AppCompatActivity {
         reciclerMinhasInscricoes.setAdapter(minhasInscricoesAdapter);
         reciclerMinhasInscricoes.setLayoutManager(new LinearLayoutManager(this));
         reciclerMinhasInscricoes.setHasFixedSize(true);
-        minhasInscricoesAdapter.notifyDataSetChanged();
     }
 
     public List<Inscricao> listarMinhasInscricoes(FirebaseAuth auth) {

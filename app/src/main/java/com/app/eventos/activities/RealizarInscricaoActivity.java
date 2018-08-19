@@ -5,13 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.eventos.R;
-import com.app.eventos.adapter.AtividadeAdapter;
 import com.app.eventos.adapter.InscricaoEventoAdapter;
 import com.app.eventos.dao.AtividadeDAO;
 import com.app.eventos.dao.ConfiguracaoFirebase;
@@ -47,7 +43,7 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscricao);
+        setContentView(R.layout.activity_realizar_inscricao);
         ButterKnife.bind(this);
 
         positionEvento = getIntent().getIntExtra("positionEvento", -1);
