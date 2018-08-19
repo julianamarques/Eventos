@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.AtividadeAdapter;
@@ -19,6 +20,7 @@ import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
 import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -86,6 +88,7 @@ public class DetalhesEventoActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         super.onResume();
 
         atividadeAdapter = new AtividadeAdapter(this, listarAtividades(evento.getId()));
@@ -96,12 +99,18 @@ public class DetalhesEventoActivity extends AppCompatActivity {
         btnInscricao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("evento", evento);
+                if (user != null){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("evento", evento);
 
-                startActivity(new Intent(DetalhesEventoActivity.this, RealizarInscricaoActivity.class).putExtras(bundle));
+                    startActivity(new Intent(DetalhesEventoActivity.this, RealizarInscricaoActivity.class).putExtras(bundle));
+                }
+                else{
+                    Toast.makeText(DetalhesEventoActivity.this, "Faça o login para se efetuar uma inscrição", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
         setarTextViews(evento, tvDescricaoEventos, tvInformacoesEventos);
     }
