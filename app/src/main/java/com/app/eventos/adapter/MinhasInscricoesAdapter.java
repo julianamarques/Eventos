@@ -91,6 +91,5 @@ public class MinhasInscricoesAdapter extends RecyclerView.Adapter<MinhasInscrico
                 textView.setText(eventos.get(i).getNome());
             }
         }
-
     }
 }

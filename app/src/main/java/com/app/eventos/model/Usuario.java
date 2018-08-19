@@ -10,10 +10,12 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private String id;
     private List<Inscricao> inscricoes;
     private List<Evento> eventos;
 
-    public Usuario(String nome, String email, String senha) {
+    public Usuario(String id, String nome, String email, String senha) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -21,6 +23,14 @@ public class Usuario {
 
     public String getNome() {
         return nome;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setNome(String nome) {
@@ -63,6 +73,7 @@ public class Usuario {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
 
+        result.put("id", id);
         result.put("nome", nome);
         result.put("email", email);
         result.put("senha", senha);
