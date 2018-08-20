@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.app.eventos.R;
 import com.app.eventos.adapter.InscricoesPorEventoAdapter;
 import com.app.eventos.dao.ConfiguracaoFirebase;
+import com.app.eventos.dao.UsuarioDAO;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.Inscricao;
 import com.app.eventos.model.Usuario;
@@ -34,6 +35,7 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
     private Evento evento;
     private int positionEvento;
     private InscricoesPorEventoAdapter inscricoesPorEventoAdapter;
+    private UsuarioDAO usuarioDAO;
 
 
     @Override
@@ -46,6 +48,7 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
 
         positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
+        usuarioDAO = new UsuarioDAO();
     }
 
     @Override
@@ -57,32 +60,9 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
                 + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Hora de realização: " + evento.getHoraInicio()
                 + "\n" + "Data de término: " + evento.getDataFim() + "\n" + "Status: " + evento.getStatusEvento());
 
-        inscricoesPorEventoAdapter = new InscricoesPorEventoAdapter(this, evento.getId(), listarUsuarios());
+        inscricoesPorEventoAdapter = new InscricoesPorEventoAdapter(this, evento.getId(), usuarioDAO.listarUsuarios());
         recyclerInscricoesNoEvento.setAdapter(inscricoesPorEventoAdapter);
         recyclerInscricoesNoEvento.setLayoutManager(new LinearLayoutManager(this));
         recyclerInscricoesNoEvento.setHasFixedSize(true);
-    }
-
-
-
-    public List<Usuario> listarUsuarios() {
-        final List<Usuario> usuarios = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("usuario").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Usuario usuario = objSnapshot.getValue(Usuario.class);
-                    usuarios.add(usuario);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return usuarios;
     }
 }
