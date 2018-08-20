@@ -1,8 +1,13 @@
 package com.app.eventos.dao;
 
+import android.support.annotation.NonNull;
+
 import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.TipoAtividade;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,5 +29,28 @@ public class AtividadeDAO {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/eventos/" + evento.getId(), eventoValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+    }
+
+    public List<Atividade> listarAtividades(String eventoId) {
+        final List<Atividade> atividades = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                atividades.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Atividade atividade = objSnapshot.getValue(Atividade.class);
+                    atividades.add(atividade);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return atividades;
     }
 }

@@ -30,18 +30,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DetalhesEventoActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_informacoes_evento) protected TextView tvInformacoesEventos;
     @BindView(R.id.tv_descricao_evento) protected TextView tvDescricaoEventos;
     @BindView(R.id.rv_lista_atividade) protected RecyclerView recyclerMeusEventos;
-    @BindView(R.id.btn_inscricao) protected Button btnInscricao;
 
 
     private Evento evento;
     private int positionEvento;
     private FirebaseAuth auth;
+    private FirebaseUser user;
     private AtividadeDAO atividadeDAO;
     private AtividadeAdapter atividadeAdapter;
 
@@ -57,62 +58,34 @@ public class DetalhesEventoActivity extends AppCompatActivity {
         evento = (Evento) getIntent().getSerializableExtra("evento");
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
         atividadeDAO = new AtividadeDAO();
-
-
-    }
-
-    public List<Atividade> listarAtividades(String eventoId) {
-        final List<Atividade> atividades = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                atividades.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Atividade atividade = objSnapshot.getValue(Atividade.class);
-                    atividades.add(atividade);
-                }
-
-                atividadeAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return atividades;
+        user = auth.getCurrentUser();
     }
 
     @Override
     protected void onResume() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         super.onResume();
 
-        atividadeAdapter = new AtividadeAdapter(this, listarAtividades(evento.getId()));
+        atividadeAdapter = new AtividadeAdapter(this, atividadeDAO.listarAtividades(evento.getId()));
+        atividadeAdapter.notifyDataSetChanged();
         recyclerMeusEventos.setAdapter(atividadeAdapter);
         recyclerMeusEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerMeusEventos.setHasFixedSize(true);
 
-        btnInscricao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (user != null){
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("evento", evento);
-
-                    startActivity(new Intent(DetalhesEventoActivity.this, RealizarInscricaoActivity.class).putExtras(bundle));
-                }
-                else{
-                    Toast.makeText(DetalhesEventoActivity.this, "Faça o login para se efetuar uma inscrição", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
         setarTextViews(evento, tvDescricaoEventos, tvInformacoesEventos);
+    }
+
+    @OnClick(R.id.btn_inscricao)
+    public void abrirTelaDeInscricao() {
+        if (user != null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("evento", evento);
+
+            startActivity(new Intent(DetalhesEventoActivity.this, RealizarInscricaoActivity.class).putExtras(bundle));
+        }
+
+        else{
+            Toast.makeText(DetalhesEventoActivity.this, "Faça o login para se efetuar uma inscrição", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setarTextViews(Evento evento, TextView tvDescricaoEventos, TextView tvInformacoesEventos) {
@@ -122,6 +95,4 @@ public class DetalhesEventoActivity extends AppCompatActivity {
                 "\n\n" +"Status: " + evento.getStatusEvento() + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Data de termino: " + evento.getDataFim()+ "\n" + "Hora de realização: " +
                 evento.getHoraInicio() + "\n\n\n\n");
     }
-
-
 }
