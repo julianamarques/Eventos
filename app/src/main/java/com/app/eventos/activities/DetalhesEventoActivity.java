@@ -66,16 +66,16 @@ public class DetalhesEventoActivity extends AppCompatActivity {
         super.onResume();
 
         atividadeAdapter = new AtividadeAdapter(this, atividadeDAO.listarAtividades(evento.getId()));
-        atividadeAdapter.notifyDataSetChanged();
         recyclerMeusEventos.setAdapter(atividadeAdapter);
         recyclerMeusEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerMeusEventos.setHasFixedSize(true);
-
         setarTextViews(evento, tvDescricaoEventos, tvInformacoesEventos);
+        atividadeAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.btn_inscricao)
     public void abrirTelaDeInscricao() {
+
         if (user != null){
             Bundle bundle = new Bundle();
             bundle.putSerializable("evento", evento);
