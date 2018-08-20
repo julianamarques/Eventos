@@ -15,7 +15,11 @@ import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.dao.AtividadeDAO;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.model.Atividade;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +34,11 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
     private List<Atividade> atividades;
     private ArrayList<Atividade> atividadesInscricao = new ArrayList<>();
     private TextView txtValorInscricao;
+    private int contador = 0;
 
-    public InscricaoEventoAdapter (Context context, List<Atividade> atividades, TextView txtValorInscricao) {
+    public InscricaoEventoAdapter (Context context, String eventoId, TextView txtValorInscricao) {
         this.context = context;
-        this.atividades = atividades;
+        this.atividades = listarAtividades(eventoId);
         this.txtValorInscricao = txtValorInscricao;
     }
 
@@ -123,6 +128,37 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
     public List<Atividade> getAtividadesInscricao() {
         return atividadesInscricao;
     }
+
+    public int getContador() {
+        return contador;
+    }
+
+    private List<Atividade> listarAtividades(String eventoId) {
+        final List<Atividade> atividades = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                atividades.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Atividade atividade = objSnapshot.getValue(Atividade.class);
+                    atividades.add(atividade);
+                    contador++;
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return atividades;
+    }
+
 
     @Override
     public int getItemCount() {

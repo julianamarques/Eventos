@@ -57,37 +57,13 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
                 + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Hora de realização: " + evento.getHoraInicio()
                 + "\n" + "Data de término: " + evento.getDataFim() + "\n" + "Status: " + evento.getStatusEvento());
 
-        inscricoesPorEventoAdapter = new InscricoesPorEventoAdapter(this, listarInscricoesNoEvento(), listarUsuarios());
+        inscricoesPorEventoAdapter = new InscricoesPorEventoAdapter(this, evento.getId(), listarUsuarios());
         recyclerInscricoesNoEvento.setAdapter(inscricoesPorEventoAdapter);
         recyclerInscricoesNoEvento.setLayoutManager(new LinearLayoutManager(this));
         recyclerInscricoesNoEvento.setHasFixedSize(true);
     }
 
-    public List<Inscricao> listarInscricoesNoEvento() {
-        final List<Inscricao> inscricoesNoEvento = new ArrayList<>();
 
-        ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").orderByChild("idEvento").equalTo(evento.getId()).addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                inscricoesNoEvento.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Inscricao inscricao = objSnapshot.getValue(Inscricao.class);
-                    inscricoesNoEvento.add(inscricao);
-                }
-
-                inscricoesPorEventoAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return inscricoesNoEvento;
-    }
 
     public List<Usuario> listarUsuarios() {
         final List<Usuario> usuarios = new ArrayList<>();

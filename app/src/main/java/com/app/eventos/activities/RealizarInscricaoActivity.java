@@ -39,7 +39,6 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
     private AtividadeDAO atividadeDAO;
     private InscricaoEventoAdapter inscricaoEventoAdapter;
     private List<Atividade> atividades;
-    private int contador = 0;
     public InscricaoDAO inscricaoDAO;
 
     @Override
@@ -55,38 +54,11 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
         inscricaoDAO = new InscricaoDAO();
     }
 
-    public List<Atividade> listarAtividades(String eventoId) {
-        final List<Atividade> atividades = new ArrayList<>();
-
-    ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                atividades.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Atividade atividade = objSnapshot.getValue(Atividade.class);
-                    atividades.add(atividade);
-                    contador++;
-                }
-
-                inscricaoEventoAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return atividades;
-    }
-
-
     @Override
     protected void onResume() {
         super.onResume();
 
-        inscricaoEventoAdapter = new InscricaoEventoAdapter(this, listarAtividades(evento.getId()), tvValorTotal);
+        inscricaoEventoAdapter = new InscricaoEventoAdapter(this, evento.getId(), tvValorTotal);
         recyclerInscricao.setAdapter(inscricaoEventoAdapter);
         recyclerInscricao.setLayoutManager(new LinearLayoutManager(this));
         recyclerInscricao.setHasFixedSize(true);
@@ -94,10 +66,12 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_salvar_inscricao)
     public void salvarInscricao() {
-        if(contador!=0){
+        if(inscricaoEventoAdapter.getContador() != 0){
             inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid());
             finish();
-        }else{
+        }
+
+        else{
             Toast.makeText(this, "Escolha pelo menos uma atividade para se inscrever no evento", Toast.LENGTH_SHORT).show();
         }
 
