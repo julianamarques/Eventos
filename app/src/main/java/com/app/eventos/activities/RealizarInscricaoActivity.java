@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.InscricaoEventoAdapter;
@@ -38,6 +39,7 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
     private AtividadeDAO atividadeDAO;
     private InscricaoEventoAdapter inscricaoEventoAdapter;
     private List<Atividade> atividades;
+    private int contador = 0;
     public InscricaoDAO inscricaoDAO;
 
     @Override
@@ -64,6 +66,7 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Atividade atividade = objSnapshot.getValue(Atividade.class);
                     atividades.add(atividade);
+                    contador++;
                 }
 
                 inscricaoEventoAdapter.notifyDataSetChanged();
@@ -91,7 +94,12 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_salvar_inscricao)
     public void salvarInscricao() {
-        inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid());
-        finish();
+        if(contador!=0){
+            inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid());
+            finish();
+        }else{
+            Toast.makeText(this, "Escolha pelo menos uma atividade para se inscrever no evento", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
