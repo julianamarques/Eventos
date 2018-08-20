@@ -32,27 +32,4 @@ public class AtividadeDAO {
         childUpdates.put("/eventos/" + evento.getId(), eventoValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
     }
-
-    public List<Atividade> listarAtividades(String eventoId) {
-        final List<Atividade> atividades = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                atividades.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Atividade atividade = objSnapshot.getValue(Atividade.class);
-                    atividades.add(atividade);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return atividades;
-    }
 }

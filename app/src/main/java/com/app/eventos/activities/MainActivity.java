@@ -74,35 +74,10 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        eventosAdapter = new EventosAdapter(this, listarEventos());
+        eventosAdapter = new EventosAdapter(this);
         recyclerEventos.setAdapter(eventosAdapter);
         recyclerEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerEventos.setHasFixedSize(true);
-    }
-
-    public List<Evento> listarEventos() {
-        final List<Evento> eventos = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("nome").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                eventos.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Evento evento = objSnapshot.getValue(Evento.class);
-                    eventos.add(evento);
-                }
-
-                eventosAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return eventos;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.app.eventos.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +12,13 @@ import android.widget.TextView;
 
 import com.app.eventos.R;
 import com.app.eventos.activities.DetalhesEventoActivity;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.model.Evento;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,9 +28,9 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
     private Context context;
     private List<Evento> eventos;
 
-    public EventosAdapter(Context context, List<Evento> eventos) {
+    public EventosAdapter(Context context) {
         this.context = context;
-        this.eventos = eventos;
+        this.eventos = listarEventos();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,5 +76,30 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
         itemView.setOnClickListener(view -> {
             context.startActivity(new Intent(context, DetalhesEventoActivity.class).putExtras(bundle));
         });
+    }
+
+    private List<Evento> listarEventos() {
+        final List<Evento> eventos = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("nome").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventos.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Evento evento = objSnapshot.getValue(Evento.class);
+                    eventos.add(evento);
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return eventos;
     }
 }

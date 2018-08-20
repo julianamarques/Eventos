@@ -65,12 +65,11 @@ public class DetalhesEventoActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        atividadeAdapter = new AtividadeAdapter(this, atividadeDAO.listarAtividades(evento.getId()));
+        atividadeAdapter = new AtividadeAdapter(this, evento.getId());
         recyclerMeusEventos.setAdapter(atividadeAdapter);
         recyclerMeusEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerMeusEventos.setHasFixedSize(true);
         setarTextViews(evento, tvDescricaoEventos, tvInformacoesEventos);
-        atividadeAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.btn_inscricao)
