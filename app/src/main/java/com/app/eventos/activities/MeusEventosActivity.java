@@ -46,36 +46,10 @@ public class MeusEventosActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        meusEventosAdapter = new MeusEventosAdapter(this, listarMeusEventos(auth));
+        meusEventosAdapter = new MeusEventosAdapter(this, auth);
         recyclerMeusEventos.setAdapter(meusEventosAdapter);
         recyclerMeusEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerMeusEventos.setHasFixedSize(true);
-    }
-
-    public List<Evento> listarMeusEventos(FirebaseAuth auth) {
-        final List<Evento> meusEventos = new ArrayList<>();
-        String usuarioId = auth.getUid();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("idUser").equalTo(usuarioId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                meusEventos.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Evento evento = objSnapshot.getValue(Evento.class);
-                    meusEventos.add(evento);
-                }
-
-                meusEventosAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return meusEventos;
     }
 
     @OnClick(R.id.fab_adicionar_eventos)
