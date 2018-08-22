@@ -6,6 +6,7 @@ import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.Inscricao;
+import com.app.eventos.model.StatusEvento;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,5 +71,14 @@ public class EventoDAO {
         });
 
         return eventos;
+    }
+
+    public void editarEvento(String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, String idUser, String idEvento, StatusEvento status) {
+        evento = new Evento(idEvento, idUser, nome, dataInicio, dataFim, horaInicio, descricao, local, status);
+
+        Map<String, Object> eventoValues = evento.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/eventos/" + idEvento, eventoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
     }
 }
