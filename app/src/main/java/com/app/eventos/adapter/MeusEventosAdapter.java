@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.app.eventos.R;
 import com.app.eventos.activities.CadastroAtividadeActivity;
 import com.app.eventos.activities.DetalhesMeuEventoActivity;
+import com.app.eventos.activities.EditarEventoActivity;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.EventoDAO;
 import com.app.eventos.model.Evento;
@@ -164,7 +165,11 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
     }
 
     public void editarEvento(View v, Evento evento, final int position){
-        Toast.makeText(context, "MT hora nessa calma...", Toast.LENGTH_SHORT).show();
+        evento = this.meusEventos.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("evento", evento);
+
+        context.startActivity(new Intent(context, EditarEventoActivity.class).putExtras(bundle));
     }
 
     public void excluirEvento(View v, Evento evento, final int position){
