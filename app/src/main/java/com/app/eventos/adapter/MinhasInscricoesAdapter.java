@@ -35,9 +35,9 @@ public class MinhasInscricoesAdapter extends RecyclerView.Adapter<MinhasInscrico
     private EventoDAO eventoDAO;
     private List<Evento> eventos;
 
-    public MinhasInscricoesAdapter(Context context, List<Evento> eventos, List<Inscricao> minhasInscricoes) {
+    public MinhasInscricoesAdapter(Context context, List<Evento> eventos, FirebaseAuth auth) {
         this.context = context;
-        this.minhasInscricoes = minhasInscricoes;
+        this.minhasInscricoes = listarMinhasInscricoes(auth);
         this.eventos = eventos;
     }
 
@@ -82,6 +82,32 @@ public class MinhasInscricoesAdapter extends RecyclerView.Adapter<MinhasInscrico
     @Override
     public int getItemCount() {
         return this.minhasInscricoes.size();
+    }
+
+    private List<Inscricao> listarMinhasInscricoes(FirebaseAuth auth) {
+        final List<Inscricao> minhasInscricoes = new ArrayList<>();
+        String usuarioId = auth.getUid();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").orderByChild("idUser").equalTo(usuarioId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                minhasInscricoes.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Inscricao inscricao = objSnapshot.getValue(Inscricao.class);
+                    minhasInscricoes.add(inscricao);
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return minhasInscricoes;
     }
 
     private void exibirNomeEvento(Inscricao inscricao, TextView textView) {

@@ -11,10 +11,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.app.eventos.R;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.InscricaoDAO;
 import com.app.eventos.model.Inscricao;
 import com.app.eventos.model.Usuario;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,9 +31,9 @@ public class InscricoesPorEventoAdapter extends  RecyclerView.Adapter<Inscricoes
     private List<Usuario> usuarios;
     private InscricaoDAO incricaoDAO;
 
-    public InscricoesPorEventoAdapter(Context context, List<Inscricao> inscricoesNoEvento, List<Usuario> usuarios) {
+    public InscricoesPorEventoAdapter(Context context, String eventoId, List<Usuario> usuarios) {
         this.context = context;
-        this.inscricoesNoEvento = inscricoesNoEvento;
+        this.inscricoesNoEvento = listarInscricoesNoEvento(eventoId);
         this.usuarios = usuarios;
         this.incricaoDAO = new InscricaoDAO();
     }
@@ -85,6 +90,32 @@ public class InscricoesPorEventoAdapter extends  RecyclerView.Adapter<Inscricoes
                 textView.setText("Nome do Participante: " + usuarios.get(i).getNome());
             }
         }
+    }
+
+    private List<Inscricao> listarInscricoesNoEvento(String eventoId) {
+        final List<Inscricao> inscricoesNoEvento = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").orderByChild("idEvento").equalTo(eventoId).addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                inscricoesNoEvento.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Inscricao inscricao = objSnapshot.getValue(Inscricao.class);
+                    inscricoesNoEvento.add(inscricao);
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return inscricoesNoEvento;
     }
 
     private void configurarClickLongo(View itemView, int position) {

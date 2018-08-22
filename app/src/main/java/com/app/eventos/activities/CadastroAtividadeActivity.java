@@ -34,7 +34,6 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
     private AtividadeDAO atividadeDAO;
     private Evento evento;
     private String idEvento;
-    private int positionEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_atividade);
         ButterKnife.bind(this);
 
-        positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
         atividadeDAO = new AtividadeDAO();
     }

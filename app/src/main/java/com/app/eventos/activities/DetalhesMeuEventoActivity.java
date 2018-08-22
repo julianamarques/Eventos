@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.app.eventos.R;
 import com.app.eventos.adapter.InscricoesPorEventoAdapter;
 import com.app.eventos.dao.ConfiguracaoFirebase;
+import com.app.eventos.dao.UsuarioDAO;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.Inscricao;
 import com.app.eventos.model.Usuario;
@@ -32,8 +33,8 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
     @BindView(R.id.rv_lista_inscricoes_no_evento) protected RecyclerView recyclerInscricoesNoEvento;
 
     private Evento evento;
-    private int positionEvento;
     private InscricoesPorEventoAdapter inscricoesPorEventoAdapter;
+    private UsuarioDAO usuarioDAO;
 
 
     @Override
@@ -44,8 +45,8 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
-        positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
+        usuarioDAO = new UsuarioDAO();
     }
 
     @Override
@@ -57,56 +58,9 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
                 + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Hora de realização: " + evento.getHoraInicio()
                 + "\n" + "Data de término: " + evento.getDataFim() + "\n" + "Status: " + evento.getStatusEvento());
 
-        inscricoesPorEventoAdapter = new InscricoesPorEventoAdapter(this, listarInscricoesNoEvento(), listarUsuarios());
+        inscricoesPorEventoAdapter = new InscricoesPorEventoAdapter(this, evento.getId(), usuarioDAO.listarUsuarios());
         recyclerInscricoesNoEvento.setAdapter(inscricoesPorEventoAdapter);
         recyclerInscricoesNoEvento.setLayoutManager(new LinearLayoutManager(this));
         recyclerInscricoesNoEvento.setHasFixedSize(true);
-    }
-
-    public List<Inscricao> listarInscricoesNoEvento() {
-        final List<Inscricao> inscricoesNoEvento = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").orderByChild("idEvento").equalTo(evento.getId()).addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                inscricoesNoEvento.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Inscricao inscricao = objSnapshot.getValue(Inscricao.class);
-                    inscricoesNoEvento.add(inscricao);
-                }
-
-                inscricoesPorEventoAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return inscricoesNoEvento;
-    }
-
-    public List<Usuario> listarUsuarios() {
-        final List<Usuario> usuarios = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("usuario").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Usuario usuario = objSnapshot.getValue(Usuario.class);
-                    usuarios.add(usuario);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return usuarios;
     }
 }

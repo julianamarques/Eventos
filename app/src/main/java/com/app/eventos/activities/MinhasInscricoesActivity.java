@@ -11,6 +11,7 @@ import com.app.eventos.R;
 import com.app.eventos.adapter.MinhasInscricoesAdapter;
 import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
+import com.app.eventos.dao.EventoDAO;
 import com.app.eventos.dao.InscricaoDAO;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.Inscricao;
@@ -31,7 +32,7 @@ public class MinhasInscricoesActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private MinhasInscricoesAdapter minhasInscricoesAdapter;
-    private InscricaoDAO inscricaoDAO;
+    private EventoDAO eventoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,65 +41,16 @@ public class MinhasInscricoesActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        inscricaoDAO = new InscricaoDAO();
+        eventoDAO = new EventoDAO();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        minhasInscricoesAdapter = new MinhasInscricoesAdapter(this, listarEventos(), listarMinhasInscricoes(auth));
+        minhasInscricoesAdapter = new MinhasInscricoesAdapter(this, eventoDAO.listarEventos(), auth);
         reciclerMinhasInscricoes.setAdapter(minhasInscricoesAdapter);
         reciclerMinhasInscricoes.setLayoutManager(new LinearLayoutManager(this));
         reciclerMinhasInscricoes.setHasFixedSize(true);
-    }
-
-    public List<Inscricao> listarMinhasInscricoes(FirebaseAuth auth) {
-        final List<Inscricao> minhasInscricoes = new ArrayList<>();
-        String usuarioId = auth.getUid();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").orderByChild("idUser").equalTo(usuarioId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                minhasInscricoes.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Inscricao inscricao = objSnapshot.getValue(Inscricao.class);
-                    minhasInscricoes.add(inscricao);
-                }
-
-                minhasInscricoesAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return minhasInscricoes;
-    }
-
-    public List<Evento> listarEventos() {
-        final List<Evento> eventos = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("nome").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                eventos.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Evento evento = objSnapshot.getValue(Evento.class);
-                    eventos.add(evento);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return eventos;
     }
  }
