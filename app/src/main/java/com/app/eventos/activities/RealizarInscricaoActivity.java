@@ -34,9 +34,7 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
 
 
     private Evento evento;
-    private int positionEvento;
     private FirebaseAuth auth;
-    private AtividadeDAO atividadeDAO;
     private InscricaoEventoAdapter inscricaoEventoAdapter;
     private List<Atividade> atividades;
     public InscricaoDAO inscricaoDAO;
@@ -47,10 +45,8 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_realizar_inscricao);
         ButterKnife.bind(this);
 
-        positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        atividadeDAO = new AtividadeDAO();
         inscricaoDAO = new InscricaoDAO();
     }
 

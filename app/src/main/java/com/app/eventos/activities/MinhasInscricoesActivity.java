@@ -32,7 +32,6 @@ public class MinhasInscricoesActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private MinhasInscricoesAdapter minhasInscricoesAdapter;
-    private InscricaoDAO inscricaoDAO;
     private EventoDAO eventoDAO;
 
     @Override
@@ -42,7 +41,6 @@ public class MinhasInscricoesActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        inscricaoDAO = new InscricaoDAO();
         eventoDAO = new EventoDAO();
     }
 

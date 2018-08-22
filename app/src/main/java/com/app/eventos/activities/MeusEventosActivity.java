@@ -29,7 +29,6 @@ public class MeusEventosActivity extends AppCompatActivity {
     @BindView(R.id.rv_lista_meus_eventos) protected RecyclerView recyclerMeusEventos;
 
     private FirebaseAuth auth;
-    private EventoDAO eventoDAO;
     private MeusEventosAdapter meusEventosAdapter;
 
     @Override
@@ -39,7 +38,6 @@ public class MeusEventosActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        eventoDAO = new EventoDAO();
     }
 
     @Override

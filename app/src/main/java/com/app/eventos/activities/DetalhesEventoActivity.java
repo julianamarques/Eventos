@@ -40,10 +40,8 @@ public class DetalhesEventoActivity extends AppCompatActivity {
 
 
     private Evento evento;
-    private int positionEvento;
     private FirebaseAuth auth;
     private FirebaseUser user;
-    private AtividadeDAO atividadeDAO;
     private AtividadeAdapter atividadeAdapter;
 
     @Override
@@ -54,10 +52,8 @@ public class DetalhesEventoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
-        positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        atividadeDAO = new AtividadeDAO();
         user = auth.getCurrentUser();
     }
 

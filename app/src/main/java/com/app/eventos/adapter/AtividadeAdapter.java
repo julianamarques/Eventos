@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.ViewHolder> {
     private Context context;
     private List<Atividade> atividades;
-    private AtividadeDAO atividadeDAO;
 
     public AtividadeAdapter (Context context, String eventoId) {
         this.context = context;

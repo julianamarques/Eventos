@@ -33,7 +33,6 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
     @BindView(R.id.rv_lista_inscricoes_no_evento) protected RecyclerView recyclerInscricoesNoEvento;
 
     private Evento evento;
-    private int positionEvento;
     private InscricoesPorEventoAdapter inscricoesPorEventoAdapter;
     private UsuarioDAO usuarioDAO;
 
@@ -46,7 +45,6 @@ public class DetalhesMeuEventoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
-        positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
         usuarioDAO = new UsuarioDAO();
     }

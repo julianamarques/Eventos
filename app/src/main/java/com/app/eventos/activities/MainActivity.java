@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth auth;
     private EventosAdapter eventosAdapter;
-    private int positionEvento;
-    private EventoDAO eventoDAO;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +63,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        eventoDAO = new EventoDAO();
-        positionEvento = getIntent().getIntExtra("idEvento", -1);
     }
 
     @Override
