@@ -66,7 +66,7 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_salvar_inscricao)
     public void salvarInscricao() {
-        if(inscricaoEventoAdapter.getContador() != 0){
+        if(!inscricaoEventoAdapter.getAtividadesInscricao().isEmpty()){
             inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid());
             finish();
         }

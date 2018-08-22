@@ -34,7 +34,6 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
     private List<Atividade> atividades;
     private ArrayList<Atividade> atividadesInscricao = new ArrayList<>();
     private TextView txtValorInscricao;
-    private int contador = 0;
 
     public InscricaoEventoAdapter (Context context, String eventoId, TextView txtValorInscricao) {
         this.context = context;
@@ -99,6 +98,7 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
 
     public double obterValorTotalInscricao(){
         double valor = 0;
+
         if (!atividadesInscricao.isEmpty()){
             for (int i = 0; i< atividadesInscricao.size(); i++){
                 valor += atividadesInscricao.get(i).getValor();
@@ -129,10 +129,6 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
         return atividadesInscricao;
     }
 
-    public int getContador() {
-        return contador;
-    }
-
     private List<Atividade> listarAtividades(String eventoId) {
         final List<Atividade> atividades = new ArrayList<>();
 
@@ -144,7 +140,6 @@ public class InscricaoEventoAdapter extends RecyclerView.Adapter<InscricaoEvento
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Atividade atividade = objSnapshot.getValue(Atividade.class);
                     atividades.add(atividade);
-                    contador++;
                 }
 
                 notifyDataSetChanged();
