@@ -1,5 +1,6 @@
 package com.app.eventos.model;
 
+import com.app.eventos.dao.StaffDAO;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public class Evento implements Serializable {
     private StatusEvento statusEvento;
     private String local;
     private String idUser;
+    private StaffDAO staffDAO;
 
     public Evento() {}
 
@@ -149,6 +151,10 @@ public class Evento implements Serializable {
 
     public List<Cupom> getCupons() {
         return cupons;
+    }
+
+    public void adicionarStaff(String idUser){
+        staffDAO.salvarStaff(idUser, this.getId());
     }
 
     @Exclude
