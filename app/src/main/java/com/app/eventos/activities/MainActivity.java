@@ -3,6 +3,7 @@ package com.app.eventos.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,28 +44,32 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     @BindView(R.id.rv_lista_eventos) protected RecyclerView recyclerEventos;
+    @BindView(R.id.nav_view) protected NavigationView navigationView;
+    @BindView(R.id.drawer_layout) protected DrawerLayout drawer;
+    @BindView(R.id.toolbar) protected Toolbar toolbar;
 
     private FirebaseAuth auth;
     private EventosAdapter eventosAdapter;
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
+        View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        TextView tvEmailUsuario = (TextView) header.findViewById(R.id.tv_email_usuario);
+        tvEmailUsuario.setText(auth.getCurrentUser().getEmail());
     }
 
     @Override
@@ -73,12 +80,13 @@ public class MainActivity extends AppCompatActivity
         recyclerEventos.setAdapter(eventosAdapter);
         recyclerEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerEventos.setHasFixedSize(true);
+
+        ocultarMenuLoginOuSair(navigationView);
+        toggle.syncState();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
@@ -93,6 +101,8 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -145,16 +155,15 @@ public class MainActivity extends AppCompatActivity
                 builder.setPositiveButton("SIM", (dialog, which) -> {
                     auth.signOut();
                     Toast.makeText(this,"Usuário deslogado!",Toast.LENGTH_SHORT).show();
+                    recreate();
                 });
                 builder.setNegativeButton("NÃO", (dialog, which) -> {
                 });
 
                 builder.create().show();
-
             }
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
@@ -162,12 +171,29 @@ public class MainActivity extends AppCompatActivity
 
     public void criarEvento(MenuItem item) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user == null) {
             startActivity(new Intent(this, LoginActivity.class));
         }
 
         else {
             startActivity(new Intent(this, CadastroEventosActivity.class));
+        }
+    }
+
+
+    private void ocultarMenuLoginOuSair(NavigationView navigationView) {
+        Menu menu = navigationView.getMenu();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user == null) {
+            menu.findItem(R.id.menu_login).setVisible(true);
+            menu.findItem(R.id.menu_sair).setVisible(false);
+        }
+
+        else {
+            menu.findItem(R.id.menu_login).setVisible(false);
+            menu.findItem(R.id.menu_sair).setVisible(true);
         }
     }
 }
