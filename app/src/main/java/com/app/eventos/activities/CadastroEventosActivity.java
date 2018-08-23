@@ -13,7 +13,7 @@ import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
 import com.app.eventos.fragments.DatePickerDataFimFragment;
 import com.app.eventos.fragments.DatePickerDataInicioFragment;
 import com.app.eventos.fragments.TimePickerFragment;
-import com.app.eventos.utils.ValidacaoCadastroEventoCampoVazio;
+import com.app.eventos.utils.ValidacaoCadastroEvento;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
@@ -71,7 +71,7 @@ public class CadastroEventosActivity extends AppCompatActivity {
         idUser = auth.getUid();
 
         try {
-            ValidacaoCadastroEventoCampoVazio.validarCampoVazio(nome, descricao, local, dataInicio, horaInicio, dataFim);
+            ValidacaoCadastroEvento.validarCampoVazio(nome, descricao, local, dataInicio, horaInicio, dataFim);
             eventoDAO.cadastrarEvento(nome, dataInicio, dataFim, horaInicio, descricao, local, idUser);
 
             Snackbar.make(view, "Conclua o cadastro em Meus eventos", Snackbar.LENGTH_SHORT).show();
