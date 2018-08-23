@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/easy_events"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.CadastroUsuarioActivity"
