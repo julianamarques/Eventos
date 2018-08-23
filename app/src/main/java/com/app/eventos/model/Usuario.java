@@ -14,6 +14,10 @@ public class Usuario {
     private List<Inscricao> inscricoes;
     private List<Evento> eventos;
 
+    public Usuario(){
+
+    }
+
     public Usuario(String id, String nome, String email, String senha) {
         this.id = id;
         this.nome = nome;

@@ -1,5 +1,6 @@
 package com.app.eventos.model;
 
+import com.app.eventos.dao.ColaboradorDAO;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
@@ -150,6 +151,7 @@ public class Evento implements Serializable {
     public List<Cupom> getCupons() {
         return cupons;
     }
+
 
     @Exclude
     public Map<String, Object> toMap() {
