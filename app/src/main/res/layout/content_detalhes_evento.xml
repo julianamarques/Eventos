@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.DetalhesEventoActivity"
-    tools:showIn="@layout/activity_detalhes_evento"
-    >
+    tools:showIn="@layout/activity_detalhes_evento">
 
-    <include layout="@layout/testando"/>
+    <include layout="@layout/atividades_do_evento"/>
 
 
 </android.support.v4.widget.NestedScrollView>

@@ -2,11 +2,9 @@ package com.app.eventos.dao;
 
 import android.support.annotation.NonNull;
 
-import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
-import com.app.eventos.model.Inscricao;
-import com.google.firebase.auth.FirebaseAuth;
+import com.app.eventos.model.StatusEvento;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -47,5 +45,39 @@ public class EventoDAO {
         });
 
         ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).removeValue();
+    }
+
+    public List<Evento> listarEventos() {
+        final List<Evento> eventos = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("nome").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventos.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Evento evento = objSnapshot.getValue(Evento.class);
+                    eventos.add(evento);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return eventos;
+    }
+
+
+
+    public void editarEvento(String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, String idUser, String idEvento, StatusEvento status, List<Atividade> atividades) {
+        evento = new Evento(idEvento, idUser, nome, dataInicio, dataFim, horaInicio, descricao, local, status, atividades);
+
+        Map<String, Object> eventoValues = evento.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/eventos/" + idEvento, eventoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
     }
 }

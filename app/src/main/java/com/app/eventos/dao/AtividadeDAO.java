@@ -1,8 +1,14 @@
 package com.app.eventos.dao;
 
+import android.support.annotation.NonNull;
+
+import com.app.eventos.adapter.AtividadeAdapter;
 import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.TipoAtividade;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +18,7 @@ import java.util.Map;
 public class AtividadeDAO {
 
     private Atividade atividade;
+
 
     public AtividadeDAO() {}
 

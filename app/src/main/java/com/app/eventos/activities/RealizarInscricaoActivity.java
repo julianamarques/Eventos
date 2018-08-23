@@ -5,13 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.eventos.R;
-import com.app.eventos.adapter.AtividadeAdapter;
 import com.app.eventos.adapter.InscricaoEventoAdapter;
 import com.app.eventos.dao.AtividadeDAO;
 import com.app.eventos.dao.ConfiguracaoFirebase;
@@ -37,57 +34,26 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
 
 
     private Evento evento;
-    private int positionEvento;
     private FirebaseAuth auth;
-    private AtividadeDAO atividadeDAO;
     private InscricaoEventoAdapter inscricaoEventoAdapter;
-    private List<Atividade> atividades;
     public InscricaoDAO inscricaoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscricao);
+        setContentView(R.layout.activity_realizar_inscricao);
         ButterKnife.bind(this);
 
-        positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        atividadeDAO = new AtividadeDAO();
         inscricaoDAO = new InscricaoDAO();
     }
-
-    public List<Atividade> listarAtividades(String eventoId) {
-        final List<Atividade> atividades = new ArrayList<>();
-
-    ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                atividades.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Atividade atividade = objSnapshot.getValue(Atividade.class);
-                    atividades.add(atividade);
-                }
-
-                inscricaoEventoAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return atividades;
-    }
-
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        inscricaoEventoAdapter = new InscricaoEventoAdapter(this, listarAtividades(evento.getId()), tvValorTotal);
+        inscricaoEventoAdapter = new InscricaoEventoAdapter(this, evento.getId(), tvValorTotal);
         recyclerInscricao.setAdapter(inscricaoEventoAdapter);
         recyclerInscricao.setLayoutManager(new LinearLayoutManager(this));
         recyclerInscricao.setHasFixedSize(true);
@@ -95,7 +61,14 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_salvar_inscricao)
     public void salvarInscricao() {
-        inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid());
-        finish();
+        if(!inscricaoEventoAdapter.getAtividadesInscricao().isEmpty()){
+            inscricaoDAO.cadastrarInscricao(evento, inscricaoEventoAdapter.getAtividadesInscricao(), auth.getUid());
+            finish();
+        }
+
+        else{
+            Toast.makeText(this, "Escolha pelo menos uma atividade para se inscrever no evento", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 package com.app.eventos.model;
 
+import com.app.eventos.dao.ColaboradorDAO;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class Evento implements Serializable {
 
     public Evento() {}
 
+
     public Evento(String id, String idUser, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local) {
         this.nome = nome;
         this.dataInicio = dataInicio;
@@ -36,6 +38,20 @@ public class Evento implements Serializable {
         this.statusEvento = StatusEvento.CRIADO;
         this.id = id;
         this.idUser = idUser;
+    }
+
+    public Evento(String id, String idUser, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, StatusEvento statusEvento, List<Atividade> atividades) {
+        this.id = id;
+        this.idUser = idUser;
+        this.nome = nome;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.horaInicio = horaInicio;
+        this.descricao = descricao;
+        this.local = local;
+        this.statusEvento = statusEvento;
+        this.atividades = atividades;
+
     }
 
     public String getId() {
@@ -138,6 +154,7 @@ public class Evento implements Serializable {
         return cupons;
     }
 
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -149,7 +166,7 @@ public class Evento implements Serializable {
         result.put("dataInicio", dataInicio);
         result.put("horaInicio", horaInicio);
         result.put("dataFim", dataFim);
-        result.put("statusEvento", StatusEvento.CRIADO);
+        result.put("statusEvento", statusEvento);
         result.put("atividades", atividades);
         result.put("idUser", idUser);
 
