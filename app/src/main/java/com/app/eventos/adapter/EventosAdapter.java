@@ -88,7 +88,10 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
 
                 for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
                     Evento evento = objSnapshot.getValue(Evento.class);
-                    eventos.add(evento);
+                    if (evento.getStatusEvento().getStatusEvento()==1){
+                        eventos.add(evento);
+                    }
+
                 }
 
                 notifyDataSetChanged();

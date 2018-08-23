@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.eventos.R;
+import com.app.eventos.activities.AdicionarColaboradorActivity;
 import com.app.eventos.activities.CadastroAtividadeActivity;
 import com.app.eventos.activities.DetalhesMeuEventoActivity;
 import com.app.eventos.activities.EditarEventoActivity;
@@ -120,6 +121,10 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
                             adicionarAtividade(v, evento, position);
                             break;
 
+                        case R.id.btn_adicionar_colaborador:
+                            adicionarColaborador(v, evento, position);
+                            break;
+
                         case R.id.btn_editar_evento:
                             editarEvento(v, evento, position);
                             break;
@@ -136,6 +141,14 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
             }
         });
 
+    }
+
+    private void adicionarColaborador(View v, Evento evento, int position) {
+        evento = this.meusEventos.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("evento", evento);
+
+        context.startActivity(new Intent(context, AdicionarColaboradorActivity.class).putExtras(bundle));
     }
 
 

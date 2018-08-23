@@ -6,6 +6,11 @@
         android:title="Adicionar Atividade"/>
 
     <item
+        android:id="@+id/btn_adicionar_colaborador"
+        android:title="Adicionar Colaborador"/>
+
+
+    <item
         android:id="@+id/btn_editar_evento"
         android:title="Editar"/>
 
