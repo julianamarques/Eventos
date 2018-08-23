@@ -93,7 +93,7 @@ public class EditarEventoActivity extends AppCompatActivity {
 
         try {
             ValidacaoCadastroEvento.validarCampoVazio(nome, descricao, local, dataInicio, horaInicio, dataFim);
-            eventoDAO.editarEvento(nome, dataInicio, dataFim, horaInicio, descricao, local, idUser, evento.getId(), status);
+            eventoDAO.editarEvento(nome, dataInicio, dataFim, horaInicio, descricao, local, idUser, evento.getId(), status, evento.getAtividades());
 
             Snackbar.make(view, "Conclua o cadastro em Meus eventos", Snackbar.LENGTH_SHORT).show();
 

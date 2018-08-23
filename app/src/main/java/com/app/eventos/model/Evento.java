@@ -27,6 +27,7 @@ public class Evento implements Serializable {
 
     public Evento() {}
 
+
     public Evento(String id, String idUser, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local) {
         this.nome = nome;
         this.dataInicio = dataInicio;
@@ -39,7 +40,7 @@ public class Evento implements Serializable {
         this.idUser = idUser;
     }
 
-    public Evento(String id, String idUser, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, StatusEvento statusEvento) {
+    public Evento(String id, String idUser, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, StatusEvento statusEvento, List<Atividade> atividades) {
         this.id = id;
         this.idUser = idUser;
         this.nome = nome;
@@ -49,6 +50,7 @@ public class Evento implements Serializable {
         this.descricao = descricao;
         this.local = local;
         this.statusEvento = statusEvento;
+        this.atividades = atividades;
 
     }
 
