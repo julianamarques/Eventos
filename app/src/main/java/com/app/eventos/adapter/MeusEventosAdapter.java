@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -17,9 +18,16 @@ import android.widget.Toast;
 import com.app.eventos.R;
 import com.app.eventos.activities.CadastroAtividadeActivity;
 import com.app.eventos.activities.DetalhesMeuEventoActivity;
+import com.app.eventos.activities.EditarEventoActivity;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.dao.EventoDAO;
 import com.app.eventos.model.Evento;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,9 +39,9 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
     private EventoDAO eventoDAO;
 
 
-    public MeusEventosAdapter(Context context, List<Evento> meusEventos) {
+    public MeusEventosAdapter(Context context, FirebaseAuth auth) {
         this.context = context;
-        this.meusEventos = meusEventos;
+        this.meusEventos = listarMeusEventos(auth);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -66,6 +74,32 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
         configurarClickCurto(holder.itemView, evento, position);
         configurarClickLongo(holder.itemView, position);
 
+    }
+
+    public List<Evento> listarMeusEventos(FirebaseAuth auth) {
+        final List<Evento> meusEventos = new ArrayList<>();
+        String usuarioId = auth.getUid();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").orderByChild("idUser").equalTo(usuarioId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                meusEventos.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Evento evento = objSnapshot.getValue(Evento.class);
+                    meusEventos.add(evento);
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return meusEventos;
     }
 
     private void configurarClickLongo(View itemView, int position) {
@@ -131,7 +165,11 @@ public class MeusEventosAdapter extends RecyclerView.Adapter<MeusEventosAdapter.
     }
 
     public void editarEvento(View v, Evento evento, final int position){
-        Toast.makeText(context, "MT hora nessa calma...", Toast.LENGTH_SHORT).show();
+        evento = this.meusEventos.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("evento", evento);
+
+        context.startActivity(new Intent(context, EditarEventoActivity.class).putExtras(bundle));
     }
 
     public void excluirEvento(View v, Evento evento, final int position){

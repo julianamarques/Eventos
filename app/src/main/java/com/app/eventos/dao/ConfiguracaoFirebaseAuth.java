@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class ConfiguracaoFirebaseAuth {
     private static FirebaseAuth firebaseAuth;
-    private static FirebaseUser firebaseUser;
 
     public static FirebaseAuth getFirebaseAuth() {
         if (firebaseAuth == null) {

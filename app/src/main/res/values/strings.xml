@@ -131,4 +131,5 @@
     <string name="palestra">Palestra</string>
     <string name="minicurso">MiniCurso</string>
     <string name="mesa_redonda">Mesa Redonda</string>
+    <string name="confirmar_inscricao">Confirmar Inscrição</string>
 </resources>

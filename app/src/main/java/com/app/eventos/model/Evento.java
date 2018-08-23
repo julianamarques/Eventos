@@ -38,6 +38,19 @@ public class Evento implements Serializable {
         this.idUser = idUser;
     }
 
+    public Evento(String id, String idUser, String nome, String dataInicio, String dataFim, String horaInicio, String descricao, String local, StatusEvento statusEvento) {
+        this.id = id;
+        this.idUser = idUser;
+        this.nome = nome;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.horaInicio = horaInicio;
+        this.descricao = descricao;
+        this.local = local;
+        this.statusEvento = statusEvento;
+
+    }
+
     public String getId() {
         return id;
     }
@@ -149,7 +162,7 @@ public class Evento implements Serializable {
         result.put("dataInicio", dataInicio);
         result.put("horaInicio", horaInicio);
         result.put("dataFim", dataFim);
-        result.put("statusEvento", StatusEvento.CRIADO);
+        result.put("statusEvento", statusEvento);
         result.put("atividades", atividades);
         result.put("idUser", idUser);
 

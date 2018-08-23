@@ -30,4 +30,14 @@ public class InscricaoDAO {
         childUpdates.put("/inscricoes/" + id, inscricaoValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
     }
+
+
+    public void confirmarInscricao(Inscricao inscricao) {
+        inscricao.setInscricaoPaga(true);
+
+        Map<String, Object> inscricaoValues = inscricao.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/inscricoes/" + inscricao.getId(), inscricaoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+    }
 }
