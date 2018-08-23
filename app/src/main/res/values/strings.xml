@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Eventos</string>
+    <string name="app_name">Easy Events</string>
     <string name="title_activity_main">Eventos</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -131,4 +131,6 @@
     <string name="palestra">Palestra</string>
     <string name="minicurso">MiniCurso</string>
     <string name="mesa_redonda">Mesa Redonda</string>
+    <string name="confirmar_inscricao">Confirmar Inscrição</string>
+    <string name="easy_events">Easy Events</string>
 </resources>

@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.CadastroUsuarioActivity"
@@ -51,7 +51,16 @@
             android:label="Cadastro de atividades"
             android:parentActivityName=".activities.MeusEventosActivity" />
         <activity android:name=".activities.RealizarInscricaoActivity" />
-        <activity android:name=".activities.MinhasInscricoesActivity"></activity>
+        <activity
+            android:name=".activities.MinhasInscricoesActivity"
+            android:label="@string/minhas_inscricoes"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.EditarEventoActivity"
+            android:label="Editar Evento"
+            android:parentActivityName=".activities.MeusEventosActivity"/>
+        <activity android:name=".activities.AdicionarColaboradorActivity"
+            android:label="Adicionar Colaborador"
+            android:parentActivityName=".activities.MeusEventosActivity"></activity>
     </application>
 
 </manifest>
