@@ -5,13 +5,13 @@ import com.google.firebase.database.Exclude;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Staff {
+public class Colaborador {
 
     private String id;
     private String idEvento;
     private String idUser;
 
-    public Staff(String id, String idEvento, String idUser) {
+    public Colaborador(String id, String idEvento, String idUser) {
         this.id = id;
         this.idEvento = idEvento;
         this.idUser = idUser;

@@ -2,14 +2,8 @@ package com.app.eventos.dao;
 
 import android.support.annotation.NonNull;
 
-import com.app.eventos.dao.ConfiguracaoFirebase;
-import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
-import com.app.eventos.model.Inscricao;
-import com.app.eventos.model.Staff;
 import com.app.eventos.model.StatusEvento;
-import com.app.eventos.model.Usuario;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
