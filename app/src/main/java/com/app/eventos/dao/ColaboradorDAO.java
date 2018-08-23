@@ -1,8 +1,10 @@
 package com.app.eventos.dao;
 
 import com.app.eventos.model.Colaborador;
+import com.app.eventos.model.Usuario;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ColaboradorDAO {
@@ -10,9 +12,9 @@ public class ColaboradorDAO {
 
     public ColaboradorDAO() {}
 
-    public void salvarColaborador(String idUser, String idEvento) {
+    public void salvarColaborador(List<Usuario> colaboradores, String idEvento) {
         String id = ConfiguracaoFirebase.getDatabaseReference().child("colaboradores").push().getKey();
-        colaborador = new Colaborador(id, idUser, idEvento);
+        colaborador = new Colaborador(id, colaboradores, idEvento);
 
         Map<String, Object> colaboradorValues = colaborador.toMap();
         Map<String, Object> childUpdates = new HashMap<>();

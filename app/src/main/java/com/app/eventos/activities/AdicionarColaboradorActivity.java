@@ -54,7 +54,7 @@ public class AdicionarColaboradorActivity extends AppCompatActivity {
     @OnClick(R.id.btn_salvar_colaborador)
     public void salvarColaborador() {
         if(!colaboradorAdapter.getUsuariosColaboradores().isEmpty()){
-            colaboradorDAO.salvarColaborador(auth.getUid(),evento.getId());
+            colaboradorDAO.salvarColaborador(colaboradorAdapter.getUsuariosColaboradores(),evento.getId());
             Toast.makeText(this, "Colaborar Adicionado ao evento", Toast.LENGTH_SHORT).show();
             finish();
         }

@@ -24,7 +24,6 @@ public class Evento implements Serializable {
     private StatusEvento statusEvento;
     private String local;
     private String idUser;
-    private ColaboradorDAO colaboradorDAO;
 
     public Evento() {}
 
@@ -153,9 +152,6 @@ public class Evento implements Serializable {
         return cupons;
     }
 
-    public void adicionarStaff(String idUser){
-        colaboradorDAO.salvarColaborador(idUser, this.getId());
-    }
 
     @Exclude
     public Map<String, Object> toMap() {
