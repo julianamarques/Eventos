@@ -36,7 +36,6 @@ public class RealizarInscricaoActivity extends AppCompatActivity {
     private Evento evento;
     private FirebaseAuth auth;
     private InscricaoEventoAdapter inscricaoEventoAdapter;
-    private List<Atividade> atividades;
     public InscricaoDAO inscricaoDAO;
 
     @Override

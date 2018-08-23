@@ -41,8 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     @BindView(R.id.rv_lista_eventos) protected RecyclerView recyclerEventos;
     @BindView(R.id.nav_view) protected NavigationView navigationView;
     @BindView(R.id.drawer_layout) protected DrawerLayout drawer;
@@ -69,7 +68,14 @@ public class MainActivity extends AppCompatActivity
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
         View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
         TextView tvEmailUsuario = (TextView) header.findViewById(R.id.tv_email_usuario);
-        tvEmailUsuario.setText(auth.getCurrentUser().getEmail());
+
+        if (LoginActivity.verificarLogin(auth.getCurrentUser())) {
+            tvEmailUsuario.setText(auth.getCurrentUser().getEmail());
+        }
+
+        else {
+            tvEmailUsuario.setText("");
+        }
     }
 
     @Override
@@ -82,7 +88,6 @@ public class MainActivity extends AppCompatActivity
         recyclerEventos.setHasFixedSize(true);
 
         ocultarMenuLoginOuSair(navigationView);
-        toggle.syncState();
     }
 
     @Override
@@ -103,39 +108,38 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         int id = item.getItemId();
 
         if (id == R.id.menu_login) {
-            if (user == null) {
-                startActivity(new Intent(this, LoginActivity.class));
+            if (LoginActivity.verificarLogin(auth.getCurrentUser())) {
+                Toast.makeText(this,"Você já está logado!",Toast.LENGTH_SHORT).show();
 
             }else {
-                Toast.makeText(this,"Você já está logado!",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, LoginActivity.class));
             }
         }
 
         else if (id == R.id.menu_minhas_inscricoes) {
-            if (user == null) {
-                Toast.makeText(this, "Faça o login para acessar minhas inscrições", Toast.LENGTH_SHORT).show();
+            if (LoginActivity.verificarLogin(auth.getCurrentUser())) {
+                startActivity(new Intent(this, MinhasInscricoesActivity.class));
             }
 
             else {
-                startActivity(new Intent(this, MinhasInscricoesActivity.class));
+                Toast.makeText(this, "Faça o login para acessar minhas inscrições", Toast.LENGTH_SHORT).show();
             }
         }
 
         else if (id == R.id.menu_meus_eventos) {
-
-                if (user == null) {
-                    Toast.makeText(this,"Faça o login para acessar meus eventos",Toast.LENGTH_SHORT).show();
-
-                }else{
+                if (LoginActivity.verificarLogin(auth.getCurrentUser())) {
                     startActivity(new Intent(this, MeusEventosActivity.class));
+
+                }
+
+                else{
+                    Toast.makeText(this,"Faça o login para acessar meus eventos",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -144,10 +148,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         else if (id == R.id.menu_sair) {
-            if (user == null){
-                Toast.makeText(this,"Você não está logado",Toast.LENGTH_SHORT).show();
-            }else{
-
+            if (LoginActivity.verificarLogin(auth.getCurrentUser())){
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
 
                 builder.setTitle("EventosAPP");
@@ -162,6 +163,10 @@ public class MainActivity extends AppCompatActivity
 
                 builder.create().show();
             }
+
+            else {
+                Toast.makeText(this, "Você não está logado", Toast.LENGTH_SHORT).show();
+            }
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -170,30 +175,27 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void criarEvento(MenuItem item) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user == null) {
-            startActivity(new Intent(this, LoginActivity.class));
+        if (LoginActivity.verificarLogin(auth.getCurrentUser())) {
+            startActivity(new Intent(this, CadastroEventosActivity.class));
         }
 
         else {
-            startActivity(new Intent(this, CadastroEventosActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         }
     }
 
 
     private void ocultarMenuLoginOuSair(NavigationView navigationView) {
         Menu menu = navigationView.getMenu();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user == null) {
-            menu.findItem(R.id.menu_login).setVisible(true);
-            menu.findItem(R.id.menu_sair).setVisible(false);
+        if (LoginActivity.verificarLogin(auth.getCurrentUser())) {
+            menu.findItem(R.id.menu_login).setVisible(false);
+            menu.findItem(R.id.menu_sair).setVisible(true);
         }
 
         else {
-            menu.findItem(R.id.menu_login).setVisible(false);
-            menu.findItem(R.id.menu_sair).setVisible(true);
+            menu.findItem(R.id.menu_login).setVisible(true);
+            menu.findItem(R.id.menu_sair).setVisible(false);
         }
     }
 }
