@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.adapter.AtividadeAdapter;
@@ -19,6 +20,7 @@ import com.app.eventos.dao.ConfiguracaoFirebaseAuth;
 import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -28,19 +30,18 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DetalhesEventoActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_informacoes_evento) protected TextView tvInformacoesEventos;
     @BindView(R.id.tv_descricao_evento) protected TextView tvDescricaoEventos;
     @BindView(R.id.rv_lista_atividade) protected RecyclerView recyclerMeusEventos;
-    @BindView(R.id.btn_inscricao) protected Button btnInscricao;
 
 
     private Evento evento;
-    private int positionEvento;
     private FirebaseAuth auth;
-    private AtividadeDAO atividadeDAO;
+    private FirebaseUser user;
     private AtividadeAdapter atividadeAdapter;
 
     @Override
@@ -51,59 +52,35 @@ public class DetalhesEventoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
-        positionEvento = getIntent().getIntExtra("positionEvento", -1);
         evento = (Evento) getIntent().getSerializableExtra("evento");
         auth = ConfiguracaoFirebaseAuth.getFirebaseAuth();
-        atividadeDAO = new AtividadeDAO();
-
-
-    }
-
-    public List<Atividade> listarAtividades(String eventoId) {
-        final List<Atividade> atividades = new ArrayList<>();
-
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                atividades.clear();
-
-                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
-                    Atividade atividade = objSnapshot.getValue(Atividade.class);
-                    atividades.add(atividade);
-                }
-
-                atividadeAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return atividades;
+        user = auth.getCurrentUser();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        atividadeAdapter = new AtividadeAdapter(this, listarAtividades(evento.getId()));
+        atividadeAdapter = new AtividadeAdapter(this, evento.getId());
         recyclerMeusEventos.setAdapter(atividadeAdapter);
         recyclerMeusEventos.setLayoutManager(new LinearLayoutManager(this));
         recyclerMeusEventos.setHasFixedSize(true);
-
-        btnInscricao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("evento", evento);
-
-                startActivity(new Intent(DetalhesEventoActivity.this, RealizarInscricaoActivity.class).putExtras(bundle));
-            }
-        });
-
         setarTextViews(evento, tvDescricaoEventos, tvInformacoesEventos);
+    }
+
+    @OnClick(R.id.btn_inscricao)
+    public void abrirTelaDeInscricao() {
+
+        if (user != null){
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("evento", evento);
+
+            startActivity(new Intent(DetalhesEventoActivity.this, RealizarInscricaoActivity.class).putExtras(bundle));
+        }
+
+        else{
+            Toast.makeText(DetalhesEventoActivity.this, "Faça o login para se efetuar uma inscrição", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setarTextViews(Evento evento, TextView tvDescricaoEventos, TextView tvInformacoesEventos) {
@@ -113,6 +90,4 @@ public class DetalhesEventoActivity extends AppCompatActivity {
                 "\n\n" +"Status: " + evento.getStatusEvento() + "\n" + "Data de início: " + evento.getDataInicio() + "\n" + "Data de termino: " + evento.getDataFim()+ "\n" + "Hora de realização: " +
                 evento.getHoraInicio() + "\n\n\n\n");
     }
-
-
 }

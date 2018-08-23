@@ -11,8 +11,13 @@ import android.widget.Toast;
 
 import com.app.eventos.R;
 import com.app.eventos.dao.AtividadeDAO;
+import com.app.eventos.dao.ConfiguracaoFirebase;
 import com.app.eventos.model.Atividade;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,11 +26,10 @@ import butterknife.ButterKnife;
 public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.ViewHolder> {
     private Context context;
     private List<Atividade> atividades;
-    private AtividadeDAO atividadeDAO;
 
-    public AtividadeAdapter (Context context, List<Atividade> atividades) {
+    public AtividadeAdapter (Context context, String eventoId) {
         this.context = context;
-        this.atividades = atividades;
+        this.atividades = listarAtividades(eventoId);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -73,6 +77,31 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.View
             }
         });
 
+    }
+
+    private List<Atividade> listarAtividades(String eventoId) {
+        final List<Atividade> atividades = new ArrayList<>();
+
+        ConfiguracaoFirebase.getDatabaseReference().child("eventos").child(eventoId).child("atividades").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                atividades.clear();
+
+                for (DataSnapshot objSnapshot : dataSnapshot.getChildren()) {
+                    Atividade atividade = objSnapshot.getValue(Atividade.class);
+                    atividades.add(atividade);
+                }
+
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return atividades;
     }
 
     @Override

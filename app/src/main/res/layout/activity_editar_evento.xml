@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.EditarEventoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status do Evento"/>
+
+        <RadioGroup
+            android:id="@+id/radio_group_status_evento"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radio_b_criado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Criado"/>
+
+            <RadioButton
+                android:id="@+id/radio_b_insc_aberta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inscrições abertas"/>
+
+            <RadioButton
+                android:id="@+id/radio_b_em_andamento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Em andamento"/>
+
+            <RadioButton
+                android:id="@+id/radio_b_realizado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Realizado"/>
+
+
+        </RadioGroup>
+
+
+
+        <include layout="@layout/activity_cadastro_eventos"/>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
