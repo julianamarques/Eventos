@@ -13,10 +13,9 @@ import com.app.eventos.R;
 import com.app.eventos.dao.AtividadeDAO;
 import com.app.eventos.fragments.DatePickerDataAtividadeFragment;
 import com.app.eventos.fragments.TimeAtividadePickerFragment;
-import com.app.eventos.model.Atividade;
 import com.app.eventos.model.Evento;
 import com.app.eventos.model.TipoAtividade;
-import com.app.eventos.utils.ValidacaoCadastroEventoCampoVazio;
+import com.app.eventos.utils.ValidacaoCadastroAtividade;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,11 +80,8 @@ public class CadastroAtividadeActivity extends AppCompatActivity {
             tipoAtividade = TipoAtividade.MINICURSO;
         }
 
-        idEvento = evento.getId();
-
-
         try {
-            ValidacaoCadastroEventoCampoVazio.validarCampoVazioAtividade(nome, data, hora, descricao, idRadioButtonChecked, valor, responsavel, idEvento);
+            ValidacaoCadastroAtividade.validarCampoVazio(nome, data, hora, descricao, idRadioButtonChecked, valor, responsavel);
             atividadeDAO.cadastrarAtividade(nome, data, hora, descricao, tipoAtividade, valor, responsavel, evento);
             finish();
             Toast.makeText(this,"Atividade Cadastrada!",Toast.LENGTH_SHORT).show();
